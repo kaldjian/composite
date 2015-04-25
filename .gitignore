@@ -1,2 +1,5 @@
 # secretkeys
 /keys.*
+
+# pyc files
+*.pyc
