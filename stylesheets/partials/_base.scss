@@ -1,0 +1,30 @@
+/**************
+ * Typography *
+ **************/
+$base-font-family: Arial, Arial, sans-serif;
+$fixed-font-family: $base-font-family;
+$base-font-size: 13px;
+$base-line-height: 1.4;
+
+
+/**********
+ * Colors *
+ **********/
+$color-1: #50CEE4;
+$color-2: #B3272C;
+$color-3: #33002E;
+$color-4: #F8F6F7;
+$color-5: #CBA3AC;
+$color-6: #562143;
+$color-7: #5F6D8B;
+
+
+/***********
+ * Modules *
+ ***********/
+@import "../modules/all";
+
+
+/************
+ * Partials *
+ ************/

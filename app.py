@@ -10,9 +10,9 @@ def index():
 	results = []
 
 	api = InstagramAPI(client_id=app.config['CLIENT_ID'], client_secret=app.config['CLIENT_SECRET'])
-	nu_media = api.media_search(count=20, lat=42.0540611, lng=-87.6713187, distance=1500)
+	nu_media = api.media_search(count=100, lat=42.0540611, lng=-87.6713187, distance=1500)
 
-	popular_media = api.media_popular(count=20)
+	# popular_media = api.media_popular(count=40)
 
 	for media in nu_media:
 		results.append(media.images['standard_resolution'].url)
