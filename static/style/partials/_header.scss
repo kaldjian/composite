@@ -7,10 +7,47 @@ header {
 		margin: 0 auto;
 		padding: 8px 0;
 		width: 90%;
+		overflow: auto;
 
-		h1 {
-			font-size: 20px;
-			color: #fff;
+		div.header-branding {
+			float: left;
+
+			h1 {
+				font-size: 20px;
+				color: #ccc;
+			}
+		}
+		div.header-inputs {
+			float: right;
+
+			ul {
+
+				li {
+					display: inline-block;
+					overflow: auto;
+
+					i {
+						float: left;
+						margin-right: 7px;
+						padding: 2px 0;
+						font-size: 19px;
+						color: #555;
+					}
+					input {
+						float: left;
+						padding: 5px 7px;
+						background-color: #444;
+						border: none;
+						border-radius: 1px;
+						font-size: 12px;
+						color: #fff;
+						outline: none;
+					}
+				}
+				li:first-child {
+					margin-right: 12px;
+				}
+			}
 		}
 	}
 }
