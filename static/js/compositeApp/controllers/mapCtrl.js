@@ -14,7 +14,13 @@ angular
     			$(this).height(width);
     		});
     	};
-
     	$scope.cropFaces();
+
+    	$('ul.faces li').mouseenter(function() {
+    		$(this).fadeTo(200, 0.8);
+    	});
+    	$('ul.faces li').mouseleave(function() {
+    		$(this).fadeTo(200, 1.0);
+    	})
 
     });

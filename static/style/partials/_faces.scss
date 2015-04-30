@@ -1,4 +1,5 @@
 section.face-grid {
+	padding-top: 45px;
 	width: 100%;
 
 	ul.faces {
@@ -21,8 +22,8 @@ section.face-grid {
 
 section.map-peek {
 	position: fixed;
-	bottom: 30px;
-	left: 30px;
+	bottom: 10px;
+	left: 10px;
 	width: 240px;
 	height: 240px;
 	background-color: #333;
@@ -33,7 +34,7 @@ section.map-peek {
 
 		span {
 			position: relative;
-			top: 100px;
+			top: 110px;
 			color: #fff;
 		}
 	}
