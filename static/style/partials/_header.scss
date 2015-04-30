@@ -1,15 +1,15 @@
 header {
-	margin-bottom: 10px;
+	position: fixed;
 	width: 100%;
 	background-color: #222;
 
 	div.header-inner {
 		margin: 0 auto;
-		padding: 10px 0;
+		padding: 8px 0;
 		width: 90%;
 
 		h1 {
-			font-size: 25px;
+			font-size: 20px;
 			color: #fff;
 		}
 	}
