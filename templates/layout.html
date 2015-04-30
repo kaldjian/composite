@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html ng-app="compositeApp">
+
+
+	<head>
+		<meta charset="utf-8" /> 
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+		<link rel="stylesheet" href="/static/style/main.css" />
+
+		<title>Composite</title>
+	</head>
+
+
+	<body>
+		<header>
+			<div class="header-inner">
+				<h1>Composite</h1>
+			</div>
+		</header>
+
+		<!-- Jinja content block -->
+		<div id="content">{% block content %}{% endblock %}</div>
+
+		<!-- Scripts -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+
+		<script src="/static/js/compositeApp/index.js"></script>
+		<script src="/static/js/compositeApp/controllers/mapCtrl.js"></script>
+	</body>
+
+
+</html>

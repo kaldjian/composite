@@ -1,0 +1,17 @@
+section.face-grid {
+	width: 100%;
+
+	ul.faces {
+		width: 100%;
+
+		li {
+			float: left;
+			width: calc(100% / 6);
+			list-style: none;
+
+			img {
+				width: 100%;
+			}
+		}
+	}
+}

@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	<section class="face-grid" ng-controller="MapCtrl">
+		<h1>{{test}}</h1>
+		<ul class="faces">
+			{% for result in results %}
+				<li>
+					<img src={{ result }} >
+				</li>
+			{% endfor %}
+		</ul>
+	</section>
+{% endblock %}
