@@ -4,7 +4,7 @@
 
 angular
 	.module('compositeApp')
-    .controller('MapCtrl', function ($scope) {
+    .controller('FaceCtrl', function ($scope) {
 
 
     	
