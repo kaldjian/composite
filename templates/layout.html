@@ -19,6 +19,17 @@
 			</div>
 		</header>
 
+		<!-- Alex's ugly test form -->
+		<form method="POST", action="/" >
+			<p style="overflow: auto;">
+				<h2 style="float: left;">Latitude: </h2>
+					<input type="text" name="lat" style="float: left; padding: 4px 10px; border: 1px solid #aaa; outline: none;">
+				<h2>Longitude: </h2>
+					<input type="text" name="lon" style="float: left; padding: 4px 10px; border: 1px solid #aaa; outline: none;">
+				<input type="submit" value="Submit" style="float: left; padding: 4px 10px; border: 1px solid #aaa; outline: none;">
+			</p>
+		</form>
+
 		<!-- Jinja content block -->
 		<div id="content">{% block content %}{% endblock %}</div>
 

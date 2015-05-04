@@ -36,6 +36,18 @@ section.face-grid {
       section.face-grid ul.faces li img {
         width: 100%; }
 
+p {
+  overflow: auto; }
+  p h2 {
+    float: left; }
+  p input {
+    float: left;
+    padding: 4px 10px;
+    border: 1px solid #aaa;
+    outline: none; }
+
+
+
 /***********
  * Globals *
  ***********/
