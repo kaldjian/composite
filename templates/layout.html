@@ -21,8 +21,11 @@
 				</div>
 				<div class="header-inputs">
 					<i class="fa fa-map-marker"></i>
-					<input type="text" placeholder="Latitude" />
-					<input type="text" placeholder="Longitude" />
+					<form method="POST" action="/">
+						<input type="text" name="lat" placeholder="Latitude" />
+						<input type="text" name="lon" placeholder="Longitude" />
+						<input type="submit" value="Submit" />
+					</form>
 				</div>
 			</div>
 		</header>
