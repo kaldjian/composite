@@ -4,11 +4,20 @@
 			<h1>Composite</h1>
 		</div>
 		<div class="header-inputs">
-			<i class="fa fa-map-marker"></i>
-			<form method="POST" action="/faces">
-				<input type="text" name="lat" placeholder="Latitude" />
-				<input type="text" name="lon" placeholder="Longitude" />
-				<input type="submit" value="Submit" />
+			<form>
+				<ul>
+					<li>
+						<i class="fa fa-map-marker"></i>
+						<input type="text" name="location" placeholder="Location" />
+					</li>
+					<li>
+						<i class="fa fa-calendar"></i>
+						<input type="text" name="date" placeholder="Date" />
+					</li>
+					<li>
+						<input type="submit" value="submit" />
+					</li>
+				</ul>
 			</form>
 		</div>
 	</div>
