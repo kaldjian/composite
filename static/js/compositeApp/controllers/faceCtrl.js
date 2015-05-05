@@ -7,7 +7,6 @@ angular
     .controller('FaceCtrl', function ($scope) {
 
 
-    	
     
 
         /******************

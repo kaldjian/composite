@@ -11,12 +11,19 @@ angular
          * Google Maps *
          ***************/
         $scope.initializeMap = function() {
+            $scope.mapCenter = new google.maps.LatLng(42.056459, -87.675267);
+
         	var mapOptions = {
-          		center: { lat: 42.056459, lng: -87.675267},
+          		center: $scope.mapCenter,
           		zoom: 15,
           		disableDefaultUI: true
         	};
         	var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+            google.maps.event.addListener(map, 'dragend', function() {
+                $scope.mapCenter = map.getCenter();
+            });
+
         };
 
 
@@ -34,6 +41,16 @@ angular
         /***********
          * Styling *
          ***********/
+
+
+        /***********
+         * Helpers *
+         ***********/
+        var latLangToString = function(ll) {
+            var lat = ll.lat;
+            var lang = ll.lang;
+            return String(lat) + ', ' + String(lang);
+        };
         
     	
     	

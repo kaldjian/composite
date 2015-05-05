@@ -62,7 +62,8 @@ main.faces {
   main.faces section.face-grid {
     width: 100%; }
     main.faces section.face-grid ul.faces {
-      width: 100%; }
+      width: 100%;
+      overflow: auto; }
       main.faces section.face-grid ul.faces li {
         float: left;
         width: calc(100% / 8);

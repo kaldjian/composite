@@ -2,6 +2,10 @@
  * Declaring Module *
  ********************/
 
-angular.module('compositeApp', [
-  // Declare here all AngularJS dependencies that are shared by all modules.
-]);
+var app = angular.module('compositeApp', []);
+
+// To make it compatible with Jinja
+app.config(['$interpolateProvider', function($interpolateProvider) {
+  	$interpolateProvider.startSymbol('{[');
+  	$interpolateProvider.endSymbol(']}');
+}]);
