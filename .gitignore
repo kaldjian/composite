@@ -3,3 +3,6 @@
 
 # pyc files
 *.pyc
+
+# stylesheet cache
+static/style/.sass-cache

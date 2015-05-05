@@ -4,9 +4,9 @@
 	<section class="face-grid" ng-controller="FaceCtrl">
 		<h1>{{test}}</h1>
 		<ul class="faces">
-			{% for result in results %}
-				<li>
-					<img src={{ result }} >
+			{% for face in results %}
+				<li ng-mouseover="hoverIn(face)" ng-mouseleave="hoverOut(face)">
+					<img src={{ face }} >
 				</li>
 			{% endfor %}
 		</ul>
