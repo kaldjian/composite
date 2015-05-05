@@ -1,20 +1,24 @@
 {% extends "layout.html" %}
 
 {% block content %}
-	<section class="face-grid" ng-controller="FaceCtrl">
-		<h1>{{test}}</h1>
-		<ul class="faces">
-			{% for face in results %}
-				<li ng-mouseover="hoverIn(face)" ng-mouseleave="hoverOut(face)">
-					<img src={{ face }} >
-				</li>
-			{% endfor %}
-		</ul>
-	</section>
+	<main class="faces" ng-controller="FaceCtrl">
 
-	<section class="map-peek">
-		<div>
-			<span>Map here</span>
-		</div>
-	</section>
+		<section class="face-grid">
+			<h1>{{test}}</h1>
+			<ul class="faces">
+				{% for face in results %}
+					<li ng-mouseover="hoverIn(face)" ng-mouseleave="hoverOut(face)">
+						<img src={{ face }} >
+					</li>
+				{% endfor %}
+			</ul>
+		</section>
+
+		<section class="map-peek" ng-click="navigateToMap()">
+			<div>
+				<span>Map here</span>
+			</div>
+		</section>
+
+	</main>
 {% endblock %}

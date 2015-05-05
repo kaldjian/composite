@@ -1,13 +1,17 @@
 {% extends "layout.html" %}
 
 {% block content %}
-	<section class="map" ng-controller="MapCtrl" ng-init="initializeMap()">
-		<div id="map-canvas"></div>
-	</section>
+	<main class="map" ng-controller="MapCtrl">
 
-	<section class="face-peek">
-		<div>
-			<span>Faces here</span>
-		</div>
-	</section>
+		<section class="google-map" ng-init="initializeMap()">
+			<div id="map-canvas"></div>
+		</section>
+
+		<section class="face-peek" ng-click="navigateToFaces()">
+			<div>
+				<span>Faces here</span>
+			</div>
+		</section>
+
+	</main>
 {% endblock %}

@@ -17,14 +17,16 @@ angular
           		disableDefaultUI: true
         	};
         	var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-        }
+        };
 
 
 
         /******************
          * UI Interaction *
          ******************/
-        
+        $scope.navigateToFaces = function() {
+        	window.location.href = "/faces";
+        };
 
 
 

@@ -1,28 +1,33 @@
-html, body, div#content, section.map, #map-canvas {
+html, body, div#content, main.map, section.google-map, #map-canvas {
 	height: 100%;
 }
 
-section.map {
+main.map {
 	padding-top: 40px;
-}
 
 
-section.face-peek {
-	position: fixed;
-	bottom: 10px;
-	left: 10px;
-	width: 240px;
-	height: 240px;
-	background-color: #333;
-	border-radius: 3px;
+	section.map {
+		
+	}
 
-	div {
-		text-align: center;
 
-		span {
-			position: relative;
-			top: 110px;
-			color: #fff;
+	section.face-peek {
+		position: fixed;
+		bottom: 10px;
+		left: 10px;
+		width: 240px;
+		height: 240px;
+		background-color: #333;
+		border-radius: 3px;
+
+		div {
+			text-align: center;
+
+			span {
+				position: relative;
+				top: 110px;
+				color: #fff;
+			}
 		}
 	}
 }

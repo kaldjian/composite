@@ -57,55 +57,54 @@ header {
           header div.header-inner div.header-inputs form ul li:last-child input {
             background-color: #47718C; }
 
-section.face-grid {
-  padding-top: 40px;
-  width: 100%; }
-  section.face-grid ul.faces {
+main.faces {
+  padding-top: 40px; }
+  main.faces section.face-grid {
     width: 100%; }
-    section.face-grid ul.faces li {
-      float: left;
-      width: calc(100% / 8);
-      list-style: none;
-      background-color: #444;
-      overflow: hidden; }
-      section.face-grid ul.faces li img {
-        width: 100%; }
+    main.faces section.face-grid ul.faces {
+      width: 100%; }
+      main.faces section.face-grid ul.faces li {
+        float: left;
+        width: calc(100% / 8);
+        list-style: none;
+        background-color: #444;
+        overflow: hidden; }
+        main.faces section.face-grid ul.faces li img {
+          width: 100%; }
+  main.faces section.map-peek {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    width: 240px;
+    height: 240px;
+    background-color: #333;
+    border-radius: 3px; }
+    main.faces section.map-peek div {
+      text-align: center; }
+      main.faces section.map-peek div span {
+        position: relative;
+        top: 110px;
+        color: #fff; }
 
-section.map-peek {
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-  width: 240px;
-  height: 240px;
-  background-color: #333;
-  border-radius: 3px; }
-  section.map-peek div {
-    text-align: center; }
-    section.map-peek div span {
-      position: relative;
-      top: 110px;
-      color: #fff; }
-
-html, body, div#content, section.map, #map-canvas {
+html, body, div#content, main.map, section.google-map, #map-canvas {
   height: 100%; }
 
-section.map {
+main.map {
   padding-top: 40px; }
-
-section.face-peek {
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-  width: 240px;
-  height: 240px;
-  background-color: #333;
-  border-radius: 3px; }
-  section.face-peek div {
-    text-align: center; }
-    section.face-peek div span {
-      position: relative;
-      top: 110px;
-      color: #fff; }
+  main.map section.face-peek {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    width: 240px;
+    height: 240px;
+    background-color: #333;
+    border-radius: 3px; }
+    main.map section.face-peek div {
+      text-align: center; }
+      main.map section.face-peek div span {
+        position: relative;
+        top: 110px;
+        color: #fff; }
 
 /***********
  * Globals *

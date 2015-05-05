@@ -1,41 +1,45 @@
-section.face-grid {
+main.faces {
 	padding-top: 40px;
-	width: 100%;
 
-	ul.faces {
+
+	section.face-grid {
 		width: 100%;
 
-		li {
-			float: left;
-			width: calc(100% / 8);
-			list-style: none;
-			background-color: #444;
-			overflow: hidden;
+		ul.faces {
+			width: 100%;
 
-			img {
-				width: 100%;
+			li {
+				float: left;
+				width: calc(100% / 8);
+				list-style: none;
+				background-color: #444;
+				overflow: hidden;
+
+				img {
+					width: 100%;
+				}
 			}
 		}
 	}
-}
 
 
-section.map-peek {
-	position: fixed;
-	bottom: 10px;
-	left: 10px;
-	width: 240px;
-	height: 240px;
-	background-color: #333;
-	border-radius: 3px;
+	section.map-peek {
+		position: fixed;
+		bottom: 10px;
+		left: 10px;
+		width: 240px;
+		height: 240px;
+		background-color: #333;
+		border-radius: 3px;
 
-	div {
-		text-align: center;
+		div {
+			text-align: center;
 
-		span {
-			position: relative;
-			top: 110px;
-			color: #fff;
+			span {
+				position: relative;
+				top: 110px;
+				color: #fff;
+			}
 		}
 	}
 }

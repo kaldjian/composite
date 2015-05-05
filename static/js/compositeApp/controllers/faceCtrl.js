@@ -13,6 +13,9 @@ angular
         /******************
          * UI Interaction *
          ******************/
+        $scope.navigateToMap = function() {
+            window.location.href = "/map";
+        };
 
 
 
