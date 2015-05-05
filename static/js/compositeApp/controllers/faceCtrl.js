@@ -13,12 +13,6 @@ angular
         /******************
          * UI Interaction *
          ******************/
-        $scope.hoverIn = function(face) {
-            face.fadeTo(200, 0.9);
-        }
-        $scope.hoverOut = function(face) {
-            face.fadeTo(200, 1.0);
-        }
 
 
 

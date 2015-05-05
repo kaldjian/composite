@@ -1,5 +1,13 @@
 {% extends "layout.html" %}
 
 {% block content %}
-	
+	<section class="map" ng-controller="MapCtrl" ng-init="initializeMap()">
+		<div id="map-canvas"></div>
+	</section>
+
+	<section class="face-peek">
+		<div>
+			<span>Faces here</span>
+		</div>
+	</section>
 {% endblock %}

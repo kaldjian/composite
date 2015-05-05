@@ -79,6 +79,27 @@ section.map-peek {
       top: 110px;
       color: #fff; }
 
+html, body, div#content, section.map, #map-canvas {
+  height: 100%; }
+
+section.map {
+  padding-top: 40px; }
+
+section.face-peek {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  width: 240px;
+  height: 240px;
+  background-color: #333;
+  border-radius: 3px; }
+  section.face-peek div {
+    text-align: center; }
+    section.face-peek div span {
+      position: relative;
+      top: 110px;
+      color: #fff; }
+
 /***********
  * Globals *
  ***********/

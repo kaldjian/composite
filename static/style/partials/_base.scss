@@ -10,13 +10,6 @@ $base-line-height: 1.4;
 /**********
  * Colors *
  **********/
-$color-1: #50CEE4;
-$color-2: #B3272C;
-$color-3: #33002E;
-$color-4: #F8F6F7;
-$color-5: #CBA3AC;
-$color-6: #562143;
-$color-7: #5F6D8B;
 
 
 /***********
@@ -30,3 +23,4 @@ $color-7: #5F6D8B;
  ************/
 @import "header";
 @import "faces";
+@import "map";

@@ -5,8 +5,12 @@ import os
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
+
+##############
+# Faces view #
+##############
+@app.route('/faces', methods=['GET', 'POST'])
+def faces():
 	results = []
 	api = InstagramAPI(client_id=app.config['CLIENT_ID'], client_secret=app.config['CLIENT_SECRET'])
 	
@@ -27,6 +31,15 @@ def index():
 		 	results.append(media.images['standard_resolution'].url)
 
 	return render_template('faces.html', results=results)
+
+
+
+############
+# Map view #
+############
+@app.route('/map', methods=['GET'])
+def map():
+	return render_template('map.html')
 
 
 
