@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html ng-app="compositeApp">
+<html lang="en" ng-app="compositeApp">
 
 
 	<head>
@@ -18,15 +18,15 @@
 		<ng-include src="'/static/partials/header.html'"></ng-include>
 
 		<!-- Jinja content block -->
-		<div id="content">
-			<div ng-view class="view-frame"></div>
-		</div>
+		<div ng-view class="view-frame" id="content"></div>
 
 		<!-- Scripts -->
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+		<script src="/static/bower_components/angular/angular.min.js"></script>
+		<script src="/static/bower_components/angular-route/angular-route.min.js"></script>
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCI7iFKhWxpeT1MYmka1uIb7rDzoPkzYyo"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 		<script src="/static/js/app.js"></script>
+		<script src="/static/js/controllers/index.js"></script>
 		<script src="/static/js/controllers/facesCtrl.js"></script>
 		<script src="/static/js/controllers/mapCtrl.js"></script>
 	</body>

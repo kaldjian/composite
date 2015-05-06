@@ -4,10 +4,10 @@
 
 'use strict';
 
-var app = angular.module('compositeApp', []);
 
-app.controller('FacesCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
-
+angular
+    .module('compositeApp.controllers')
+    .controller('FacesCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
 
 
     /*******************

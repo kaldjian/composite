@@ -1,30 +1,34 @@
-/********************
- * Declaring Module *
- ********************/
+/*************************
+ * Declaring Main Module *
+ *************************/
 
 'use strict';
 
 var app = angular.module('compositeApp', [
     'ngRoute',
+    'compositeApp.controllers',
 ]);
 
-// To make it compatible with Jinja
+
 app.config(['$interpolateProvider', '$routeProvider',
     function($interpolateProvider, $routeProvider) {
+
+        // To make Angular + Jinja work
         $interpolateProvider.startSymbol('{[');
         $interpolateProvider.endSymbol(']}');
 
+
+        // Router
         $routeProvider.
             when('/map', {
                 templateUrl: '../static/partials/map.html',
-                controller: 'MapCtrl',
+                // controller: 'AboutCtrl'
             }).
             when('/faces', {
                 templateUrl: '../static/partials/faces.html',
-                controller: 'FacesCtrl',
+                controller: 'LoginController'
             }).
             otherwise({
                 redirectTo: '/map'
             });
-
     }]);
