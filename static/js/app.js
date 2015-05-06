@@ -22,11 +22,11 @@ app.config(['$interpolateProvider', '$routeProvider',
         $routeProvider.
             when('/map', {
                 templateUrl: '../static/partials/map.html',
-                // controller: 'AboutCtrl'
+                controller: 'MapCtrl'
             }).
             when('/faces', {
                 templateUrl: '../static/partials/faces.html',
-                controller: 'LoginController'
+                controller: 'FacesCtrl'
             }).
             otherwise({
                 redirectTo: '/map'

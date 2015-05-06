@@ -13,6 +13,7 @@ angular
     /*******************
      * Data Management *
      *******************/
+    
 
 
 
@@ -20,7 +21,7 @@ angular
      * UI Interaction *
      ******************/
     $scope.navigateToMap = function() {
-        window.location.href = "/map";
+        window.location.href = "/#/map";
     };
 
 

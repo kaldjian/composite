@@ -46,7 +46,7 @@ angular
          * UI Interaction *
          ******************/
         $scope.navigateToFaces = function() {
-            window.location.href = "/faces";
+            window.location.href = "/#/faces";
         };
 
 
