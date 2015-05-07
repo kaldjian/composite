@@ -63,15 +63,19 @@ main.faces {
     width: 100%; }
     main.faces section.face-grid ul.faces {
       width: 100%;
-      overflow: auto; }
+      overflow: auto;
+      background-color: #333; }
       main.faces section.face-grid ul.faces li {
         float: left;
-        width: calc(100% / 8);
+        margin: 4px 4px 0 0;
+        width: calc((100% - (10 * 4px) - 4px) / 10);
         list-style: none;
-        background-color: #444;
+        background-color: #333;
         overflow: hidden; }
         main.faces section.face-grid ul.faces li img {
           width: 100%; }
+      main.faces section.face-grid ul.faces li:nth-child(8n+1) {
+        margin-left: 4px; }
   main.faces section.map-peek {
     position: fixed;
     bottom: 10px;

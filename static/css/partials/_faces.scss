@@ -8,17 +8,22 @@ main.faces {
 		ul.faces {
 			width: 100%;
 			overflow: auto;
+			background-color: #333;
 
 			li {
 				float: left;
-				width: calc(100% / 8);
+				margin: 4px 4px 0 0;
+				width: calc((100% - (10 * 4px) - 4px) / 10);
 				list-style: none;
-				background-color: #444;
+				background-color: #333;
 				overflow: hidden;
 
 				img {
 					width: 100%;
 				}
+			}
+			li:nth-child(8n+1) {
+				margin-left: 4px;
 			}
 		}
 	}

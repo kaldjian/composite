@@ -1,5 +1,5 @@
 /***********************
- * Face View Controller *
+ * Map View Controller *
  ***********************/
 
 'use strict';
@@ -7,36 +7,73 @@
 
 angular
     .module('compositeApp.controllers')
-    .controller('MapCtrl', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
+    .controller('MapCtrl', ['$scope', '$http', '$rootScope', 'GoogleMapsSrv', function ($scope, $http, $rootScope, GoogleMapsSrv) {
 
 
         /***************
          * Google Maps *
          ***************/
         $scope.initializeMap = function() {
-            $scope.mapCenter = new google.maps.LatLng(42.056459, -87.675267);
+            // Create map --> add dragend listener
+            var promise = new Promise(function(resolve, reject) {
+                var success = false;
+                $scope.map = GoogleMapsSrv.getMap('mainMap');
 
-            // Create map
-            var mapOptions = {
-                center: $scope.mapCenter,
-                zoom: 15,
-                disableDefaultUI: true
-            };
-            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                // If map hasn't been created yet
+                if ($scope.map == -1) {
+                    // Initialize default map
+                    var mapOptions = {
+                        center: new google.maps.LatLng(42.056459, -87.675267),
+                        zoom: 15,
+                        disableDefaultUI: true
+                    };
+                    $scope.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                    GoogleMapsSrv.addMap('mainMap');
+                    GoogleMapsSrv.updateMap('mainMap', $scope.map.getCenter(), $scope.map.getZoom());
+                    var success = true;
+                }
 
-            // Listen for "dragend" events
-            google.maps.event.addListener(map, 'dragend', function() {
-                var lat = map.getCenter().lat();
-                var lng = map.getCenter().lng();
+                // If a map's already been created
+                else {
+                    // Retrieve state and initialize
+                    var mapOptions = {
+                        center: $scope.map.center,
+                        zoom: $scope.map.zoom,
+                        disableDefaultUI: true
+                    };
+                    $scope.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                    var success = true;
+                }
 
-                $http.post('/instagram', {"lat": lat, "lng": lng}).
-                    success(function(results) {
-                        $rootScope.faces = results;
-                        console.log($rootScope.faces);
-                    }).
-                    error(function(error) {
-                        console.log(error);
-                    });
+                // Promise results
+                if (success) {
+                    resolve("Stuff worked!");
+                }
+                else {
+                    reject(Error("It broke"));
+                }
+            });
+
+            // After the map's been created, add dragend listener
+            promise.then(function(result) {
+                google.maps.event.addListener($scope.map, 'dragend', function() {
+                    // Update state
+                    GoogleMapsSrv.updateMap('mainMap', $scope.map.getCenter(), $scope.map.getZoom());
+
+                    // Hit instagram endpoint
+                    var lat = $scope.map.getCenter().lat();
+                    var lng = $scope.map.getCenter().lng();
+                    $http.post('/instagram', {"lat": lat, "lng": lng}).
+                        success(function(results) {
+                            $rootScope.faces = results;
+                        }).
+                        error(function(error) {
+                            console.log(error);
+                        });
+                });
+
+            }, function(err) {
+                console.log(err);
             });
         };
 
