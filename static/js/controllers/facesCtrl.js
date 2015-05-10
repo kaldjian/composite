@@ -7,12 +7,13 @@
 
 angular
     .module('compositeApp.controllers')
-    .controller('FacesCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+    .controller('FacesCtrl', ['$scope', 'FaceStorageSrv', function ($scope, FaceStorageSrv) {
 
 
     /*******************
      * Data Management *
      *******************/
+    $scope.faces = FaceStorageSrv.getFaces();
 
 
 

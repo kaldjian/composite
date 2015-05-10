@@ -74,7 +74,7 @@ main.faces {
         overflow: hidden; }
         main.faces section.face-grid ul.faces li img {
           width: 100%; }
-      main.faces section.face-grid ul.faces li:nth-child(8n+1) {
+      main.faces section.face-grid ul.faces li:nth-child(10n+1) {
         margin-left: 4px; }
   main.faces section.map-peek {
     position: fixed;

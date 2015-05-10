@@ -7,7 +7,7 @@
 
 angular
     .module('compositeApp.controllers')
-    .controller('MapCtrl', ['$scope', '$http', '$rootScope', 'GoogleMapsSrv', function ($scope, $http, $rootScope, GoogleMapsSrv) {
+    .controller('MapCtrl', ['$scope', '$http', 'MapStateSrv', 'FaceStorageSrv', function ($scope, $http, MapStateSrv, FaceStorageSrv) {
 
 
         /***************
@@ -17,7 +17,7 @@ angular
             // Create map --> add dragend listener
             var promise = new Promise(function(resolve, reject) {
                 var success = false;
-                $scope.map = GoogleMapsSrv.getMap('mainMap');
+                $scope.map = MapStateSrv.getMap('mainMap');
 
                 // If map hasn't been created yet
                 if ($scope.map == -1) {
@@ -28,8 +28,8 @@ angular
                         disableDefaultUI: true
                     };
                     $scope.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-                    GoogleMapsSrv.addMap('mainMap');
-                    GoogleMapsSrv.updateMap('mainMap', $scope.map.getCenter(), $scope.map.getZoom());
+                    MapStateSrv.addMap('mainMap');
+                    MapStateSrv.updateMap('mainMap', $scope.map.getCenter(), $scope.map.getZoom());
                     var success = true;
                 }
 
@@ -58,14 +58,14 @@ angular
             promise.then(function(result) {
                 google.maps.event.addListener($scope.map, 'dragend', function() {
                     // Update state
-                    GoogleMapsSrv.updateMap('mainMap', $scope.map.getCenter(), $scope.map.getZoom());
+                    MapStateSrv.updateMap('mainMap', $scope.map.getCenter(), $scope.map.getZoom());
 
                     // Hit instagram endpoint
                     var lat = $scope.map.getCenter().lat();
                     var lng = $scope.map.getCenter().lng();
                     $http.post('/instagram', {"lat": lat, "lng": lng}).
                         success(function(results) {
-                            $rootScope.faces = results;
+                            FaceStorageSrv.updateFaces(results)
                         }).
                         error(function(error) {
                             console.log(error);

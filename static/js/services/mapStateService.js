@@ -1,31 +1,31 @@
-/***********************
- * Map View Controller *
- ***********************/
+/*********************
+ * Map State Service *
+ *********************/
 
 'use strict';
 
 
 angular
     .module('compositeApp.services')
-    .factory('GoogleMapsSrv', function () {
+    .factory('MapStateSrv', function () {
 
         // Holds all maps
-    	var maps = {};
+        var maps = {};
 
 
         // Adds a map
-    	function addMap(mapId) {
-    		maps[mapId] = {};
-    	};
+        function addMap(mapId) {
+            maps[mapId] = {};
+        };
 
 
         // Returns a map given its ID
-    	function getMap(mapId) {
-    		if (!maps[mapId]) {
-    			return -1;
-    		}
-    		return maps[mapId];
-    	};
+        function getMap(mapId) {
+            if (!maps[mapId]) {
+                return -1;
+            }
+            return maps[mapId];
+        };
 
 
         // Updates a map's state
@@ -39,10 +39,10 @@ angular
 
 
         // Returns handles to the service's functions
-    	return {
-    		addMap: addMap,
-    		getMap: getMap,
+        return {
+            addMap: addMap,
+            getMap: getMap,
             updateMap: updateMap
-    	};
+        };
 
     });
