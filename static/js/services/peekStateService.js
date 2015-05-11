@@ -1,5 +1,5 @@
 /**********************
- * View State Service *
+ * Peek State Service *
  **********************/
 
 'use strict';
@@ -7,21 +7,22 @@
 
 angular
     .module('compositeApp.services')
-    .factory('ViewStateSrv', ['FaceStorageSrv', function (FaceStorageSrv) {
+    .factory('PeekStateSrv', ['FaceStorageSrv', function (FaceStorageSrv) {
 
-        // Holds all faces
+
+        // Holds current view state
         var viewState;
 
 
-        // Adds a map
+        // Updates view state and implements the appropriate peek box
         function updateState(state) {
             viewState = state;
-            implementState();
+            implementPeek();
         };
 
 
-        // Implements view state
-        function implementState() {
+        // Implements a view state's peek box
+        function implementPeek() {
             switch (viewState) {
 
                 case 'map':
@@ -29,7 +30,6 @@ angular
                     var facesMarkup = "<ul class='faces-peek'>";
                     for (var i=0; i<faces.length; i++) {
                         facesMarkup += "<li><img src='" + faces[i] + "'/></li>";
-                        // console.log(faces[i]);
                     }
                     facesMarkup += "</ul>";
                     $('div#peek-canvas').html(facesMarkup);
@@ -53,13 +53,11 @@ angular
         };
 
 
-
-
-
         // Returns handles to the service's functions
         return {
             updateState: updateState,
             getState: getState,
         };
+
 
     }]);
