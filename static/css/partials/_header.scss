@@ -1,12 +1,12 @@
 header {
 	position: fixed;
 	width: 100%;
-	background-color: #222;
+	background-color: #373737;
 	z-index: 10;
 
 	div.header-inner {
 		margin: 0 auto;
-		padding: 8px 0;
+		padding: 8px 0 6px 0;
 		width: 90%;
 		overflow: auto;
 
@@ -14,8 +14,11 @@ header {
 			float: left;
 
 			h1 {
+				padding: 2px 0 0 0;
+				font-family: $fixed-font-family;
 				font-size: 20px;
-				color: #ccc;
+				color: #8f8f8f;
+				letter-spacing: 3px;
 			}
 		}
 		div.header-inputs {
@@ -37,25 +40,24 @@ header {
 							margin-right: 7px;
 							padding: 2px 0;
 							font-size: 19px;
-							color: #555;
+							color: #bababa;
 						}
 						input {
 							float: left;
 							padding: 5px 7px;
-							background-color: #444;
+							background-color: lighten(#373737, 3%);
 							border: none;
 							border-radius: 1px;
 							font-size: 12px;
-							color: #fff;
+							color: #bababa;
 							outline: none;
+						}
+						input:focus {
+							background-color: lighten(#373737, 6%);
 						}
 					}
 					li:last-child {
 						margin-right: 0;
-
-						input {
-							background-color: #47718C;
-						}
 					}
 				}
 			}

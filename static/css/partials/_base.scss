@@ -1,8 +1,12 @@
 /**************
  * Typography *
  **************/
+@font-face {
+	font-family: Pier;
+	src: url('/static/fonts/PierSans/pier-regular.otf');
+}
 $base-font-family: Arial, Arial, sans-serif;
-$fixed-font-family: $base-font-family;
+$fixed-font-family: Pier;
 $base-font-size: 13px;
 $base-line-height: 1.4;
 

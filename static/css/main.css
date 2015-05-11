@@ -4,6 +4,9 @@
 /**************
  * Typography *
  **************/
+@font-face {
+  font-family: Pier;
+  src: url("/static/fonts/PierSans/pier-regular.otf"); }
 /**********
  * Colors *
  **********/
@@ -16,18 +19,21 @@
 header {
   position: fixed;
   width: 100%;
-  background-color: #222;
+  background-color: #373737;
   z-index: 10; }
   header div.header-inner {
     margin: 0 auto;
-    padding: 8px 0;
+    padding: 8px 0 6px 0;
     width: 90%;
     overflow: auto; }
     header div.header-inner div.header-branding {
       float: left; }
       header div.header-inner div.header-branding h1 {
+        padding: 2px 0 0 0;
+        font-family: Pier;
         font-size: 20px;
-        color: #ccc; }
+        color: #8f8f8f;
+        letter-spacing: 3px; }
     header div.header-inner div.header-inputs {
       float: right; }
       header div.header-inner div.header-inputs form ul {
@@ -42,20 +48,20 @@ header {
             margin-right: 7px;
             padding: 2px 0;
             font-size: 19px;
-            color: #555; }
+            color: #bababa; }
           header div.header-inner div.header-inputs form ul li input {
             float: left;
             padding: 5px 7px;
-            background-color: #444;
+            background-color: #3f3f3f;
             border: none;
             border-radius: 1px;
             font-size: 12px;
-            color: #fff;
+            color: #bababa;
             outline: none; }
+          header div.header-inner div.header-inputs form ul li input:focus {
+            background-color: #464646; }
         header div.header-inner div.header-inputs form ul li:last-child {
           margin-right: 0; }
-          header div.header-inner div.header-inputs form ul li:last-child input {
-            background-color: #47718C; }
 
 main.faces {
   padding-top: 40px; }
