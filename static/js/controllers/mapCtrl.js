@@ -69,7 +69,8 @@ angular
                     var lng = $scope.map.getCenter().lng();
                     $http.post('/instagram', {"lat": lat, "lng": lng}).
                         success(function(results) {
-                            FaceStorageSrv.updateFaces(results)
+                            FaceStorageSrv.updateFaces(results);
+                            PeekStateSrv.updateState('map');
                         }).
                         error(function(error) {
                             console.log(error);
