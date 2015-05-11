@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request, send_file
 from instagram.client import InstagramAPI
+from flask.ext.sqlalchemy import SQLAlchemy
 import os
 import json
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
+db = SQLAlchemy(app)
 
 
 ###############
