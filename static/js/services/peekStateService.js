@@ -7,7 +7,7 @@
 
 angular
     .module('compositeApp.services')
-    .factory('PeekStateSrv', ['FaceStorageSrv', function (FaceStorageSrv) {
+    .factory('PeekStateSrv', ['MapStateSrv', 'FaceStorageSrv', function (MapStateSrv, FaceStorageSrv) {
 
 
         // Holds current view state
@@ -24,7 +24,6 @@ angular
         // Implements a view state's peek box
         function implementPeek() {
             switch (viewState) {
-
                 case 'map':
                     var faces = FaceStorageSrv.getFaces();
                     var facesMarkup = "<ul class='faces-peek'>";
@@ -36,12 +35,13 @@ angular
                     break;
 
                 case 'faces':
+                    var map = MapStateSrv.getMap('mainMap');
                     var mapOptions = {
-                        center: new google.maps.LatLng(42.056459, -87.675267),
-                        zoom: 15,
+                        center: map.center,
+                        zoom: map.zoom,
                         disableDefaultUI: true
                     };
-                    var map = new google.maps.Map(document.getElementById('peek-canvas'), mapOptions);
+                    map = new google.maps.Map(document.getElementById('peek-canvas'), mapOptions);
                     break;
             }
         };
