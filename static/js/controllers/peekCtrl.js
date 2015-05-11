@@ -7,7 +7,7 @@
 
 angular
     .module('compositeApp.controllers')
-    .controller('PeekCtrl', ['$scope', 'ViewStateSrv', function ($scope, ViewStateSrv) {
+    .controller('PeekCtrl', ['$scope', 'PeekStateSrv', function ($scope, PeekStateSrv) {
 
 
     /*******************
@@ -21,7 +21,7 @@ angular
      * UI Interaction *
      ******************/
     $scope.toggleMainView = function() {
-        var curr = ViewStateSrv.getState();
+        var curr = PeekStateSrv.getState();
         switch (curr) {
             case 'map':
                 window.location.href = "/#/faces";

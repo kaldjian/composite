@@ -7,15 +7,15 @@
 
 angular
     .module('compositeApp.controllers')
-    .controller('FacesCtrl', ['$scope', 'FaceStorageSrv', 'ViewStateSrv', function ($scope, FaceStorageSrv, ViewStateSrv) {
+    .controller('FacesCtrl', ['$scope', 'FaceStorageSrv', 'PeekStateSrv', function ($scope, FaceStorageSrv, PeekStateSrv) {
 
 
     /*******************
      * Data Management *
      *******************/
     // Update view state for peek box
-    ViewStateSrv.updateState('faces');
-    
+    PeekStateSrv.updateState('faces');
+
     // Get faces
     $scope.faces = FaceStorageSrv.getFaces();
 

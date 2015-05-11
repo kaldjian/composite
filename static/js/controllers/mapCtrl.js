@@ -7,14 +7,14 @@
 
 angular
     .module('compositeApp.controllers')
-    .controller('MapCtrl', ['$scope', '$http', 'MapStateSrv', 'FaceStorageSrv', 'ViewStateSrv', function ($scope, $http, MapStateSrv, FaceStorageSrv, ViewStateSrv) {
+    .controller('MapCtrl', ['$scope', '$http', 'MapStateSrv', 'FaceStorageSrv', 'PeekStateSrv', function ($scope, $http, MapStateSrv, FaceStorageSrv, PeekStateSrv) {
 
 
         /*******************
          * Data Management *
          *******************/
          // Update view state for peek box
-         ViewStateSrv.updateState('map');
+         PeekStateSrv.updateState('map');
 
         // Initialize map
         $scope.initializeMap = function() {
