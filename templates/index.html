@@ -17,8 +17,11 @@
 		<!-- Header -->
 		<ng-include src="'/static/partials/header.html'"></ng-include>
 
-		<!-- Jinja content block -->
+		<!-- Angular view frame -->
 		<div ng-view class="view-frame" id="content"></div>
+
+		<!-- Peek partial -->
+		<ng-include src="'/static/partials/peek.html'" ng-controller="PeekCtrl"></ng-include>
 
 		<!-- Scripts -->
 		<script src="/static/bower_components/angular/angular.min.js"></script>
@@ -29,9 +32,11 @@
 		<script src="/static/js/controllers/index.js"></script>
 		<script src="/static/js/controllers/facesCtrl.js"></script>
 		<script src="/static/js/controllers/mapCtrl.js"></script>
+		<script src="/static/js/controllers/peekCtrl.js"></script>
 		<script src="/static/js/services/index.js"></script>
 		<script src="/static/js/services/mapStateService.js"></script>
 		<script src="/static/js/services/faceStorageService.js"></script>
+		<script src="/static/js/services/viewStateService.js"></script>
 	</body>
 
 

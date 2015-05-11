@@ -7,12 +7,16 @@
 
 angular
     .module('compositeApp.controllers')
-    .controller('MapCtrl', ['$scope', '$http', 'MapStateSrv', 'FaceStorageSrv', function ($scope, $http, MapStateSrv, FaceStorageSrv) {
+    .controller('MapCtrl', ['$scope', '$http', 'MapStateSrv', 'FaceStorageSrv', 'ViewStateSrv', function ($scope, $http, MapStateSrv, FaceStorageSrv, ViewStateSrv) {
 
 
-        /***************
-         * Google Maps *
-         ***************/
+        /*******************
+         * Data Management *
+         *******************/
+         // Update view state for peek box
+         ViewStateSrv.updateState('map');
+
+        // Initialize map
         $scope.initializeMap = function() {
             // Create map --> add dragend listener
             var promise = new Promise(function(resolve, reject) {

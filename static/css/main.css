@@ -111,6 +111,34 @@ main.map {
         top: 110px;
         color: #fff; }
 
+section.peek {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  width: 240px;
+  height: 240px;
+  background-color: #333;
+  border-radius: 3px; }
+  section.peek div#peek-canvas {
+    width: 100%;
+    height: 100%; }
+    section.peek div#peek-canvas ul.faces-peek {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #333; }
+      section.peek div#peek-canvas ul.faces-peek li {
+        float: left;
+        margin: 2px 2px 0 0;
+        width: calc((100% - (6 * 2px) - 2px) / 6);
+        list-style: none;
+        background-color: #333;
+        overflow: hidden; }
+        section.peek div#peek-canvas ul.faces-peek li img {
+          width: 100%; }
+      section.peek div#peek-canvas ul.faces-peek li:nth-child(6n+1) {
+        margin-left: 2px; }
+
 /***********
  * Globals *
  ***********/
