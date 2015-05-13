@@ -64,19 +64,20 @@ header {
           margin-right: 0; }
 
 main.faces {
-  padding-top: 40px; }
+  padding-top: 40px;
+  background-color: #515151;
+  height: 100%; }
   main.faces section.face-grid {
     width: 100%; }
     main.faces section.face-grid ul.faces {
       width: 100%;
-      overflow: auto;
-      background-color: #333; }
+      overflow: auto; }
       main.faces section.face-grid ul.faces li {
         float: left;
         margin: 4px 4px 0 0;
         width: calc((100% - (10 * 4px) - 4px) / 10);
         list-style: none;
-        background-color: #333;
+        background-color: #373737;
         overflow: hidden; }
         main.faces section.face-grid ul.faces li img {
           width: 100%; }

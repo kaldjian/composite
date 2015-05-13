@@ -7,7 +7,7 @@
 
 angular
     .module('compositeApp.services')
-    .factory('PeekStateSrv', ['MapStateSrv', 'FaceStorageSrv', function (MapStateSrv, FaceStorageSrv) {
+    .factory('PeekStateSrv', ['MapStateSrv', 'FaceStorageSrv', 'SiteNavigationSrv', function (MapStateSrv, FaceStorageSrv, SiteNavigationSrv) {
 
 
         // Holds current view state
@@ -34,15 +34,43 @@ angular
                     $('div#peek-canvas').html(facesMarkup);
                     break;
 
+
                 case 'faces':
-                    var map = MapStateSrv.getMap('mainMap');
-                    var mapOptions = {
-                        center: map.center,
-                        zoom: map.zoom,
-                        disableDefaultUI: true
-                    };
-                    map = new google.maps.Map(document.getElementById('peek-canvas'), mapOptions);
-                    break;
+                    // Initial load
+                    if (SiteNavigationSrv.checkFirstTime()) {
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(function(position) {
+                                var pos = new google.maps.LatLng(position.coords.latitude,
+                                                                 position.coords.longitude);
+                                var mapOptions = {
+                                    center: pos,
+                                    zoom: 15,
+                                    disableDefaultUI: true
+                                };
+                                var map = new google.maps.Map(document.getElementById('peek-canvas'), mapOptions);
+                                MapStateSrv.addMap('mainMap');
+                                MapStateSrv.updateMap('mainMap', map.getCenter(), map.getZoom());
+                            }, function() {
+                                console.log('no geolocation');
+                            });
+                            SiteNavigationSrv.updateTime();
+                        }
+                        else {
+                            console.log('no geolocation');
+                            SiteNavigationSrv.updateTime();
+                        }
+                    }
+                    // Later /faces load
+                    else {
+                        var map = MapStateSrv.getMap('mainMap');
+                        var mapOptions = {
+                            center: map.center,
+                            zoom: map.zoom,
+                            disableDefaultUI: true
+                        };
+                        map = new google.maps.Map(document.getElementById('peek-canvas'), mapOptions);
+                        break;
+                    }
             }
         };
 
