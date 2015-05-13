@@ -46,6 +46,12 @@ angular
             case 'map':
                 $('div#peek-map').hide();
                 $('div#peek-faces').show();
+                var checkForFaces = window.setInterval(function() {
+                    if ($scope.facesModel.faces.length > 0){
+                        clearInterval(checkForFaces);
+                        $scope.cropFaces();
+                    }
+                }, 100);
                 break;
         }
     };
@@ -56,6 +62,8 @@ angular
     /******************
      * UI Interaction *
      ******************/
+
+    // Toggle active view on peek box click
     $scope.toggleActiveView = function() {
         switch ($scope.siteStateModel.activeView) {
             case 'faces':
@@ -77,6 +85,14 @@ angular
     /***********
      * Styling *
      ***********/
+
+    // Crop images into squares
+    $scope.cropFaces = function() {
+        $('ul.faces-peek li').each(function() {
+            var width = $(this).children('img').width();
+            $(this).height(width);
+        });
+    };
 
 
 }]);

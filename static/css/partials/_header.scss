@@ -7,7 +7,7 @@ header {
 	div.header-inner {
 		margin: 0 auto;
 		padding: 8px 0 6px 0;
-		width: 90%;
+		width: calc(100% - 50px);
 		overflow: auto;
 
 		div.header-branding {

@@ -28,7 +28,7 @@ angular
     /***********
      * Styling *
      ***********/
-     $scope.cropFaces = function() {
+    $scope.cropFaces = function() {
         $('ul.faces li').each(function() {
             var width = $(this).children('img').width();
             $(this).height(width);
