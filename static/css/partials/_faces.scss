@@ -1,7 +1,7 @@
 main.faces {
 	padding-top: 40px;
 	background-color: lighten($header-color, 10%);
-	height: 100%;
+	height: calc(100% - 40px);
 
 
 	section.face-grid {
@@ -9,6 +9,7 @@ main.faces {
 
 		ul.faces {
 			width: 100%;
+			background-color: lighten($header-color, 10%);
 			overflow: auto;
 
 			li {

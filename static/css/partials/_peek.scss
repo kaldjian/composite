@@ -7,9 +7,7 @@ section.peek {
 	background-color: #333;
 	border-radius: 3px;
 
-	div#peek-canvas {
-		width: 100%;
-		height: 100%;
+	div#peek-faces {
 
 		ul.faces-peek {
 			width: 100%;
@@ -33,5 +31,9 @@ section.peek {
 				margin-left: 2px;
 			}
 		}
+	}
+	div#peek-map, div#peek-faces {
+		width: 100%;
+		height:100%;
 	}
 }
