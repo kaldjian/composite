@@ -1,5 +1,13 @@
-<section class="peek" ng-click="toggleMainView()" ng-init="initializePeek()">
+<section class="peek" ng-click="toggleActiveView()" ng-init="initializePeek()">
 
-	<div id="peek-canvas"></div>
+	<div id="peek-map"></div>
+
+	<div id="peek-faces">
+		<ul class="faces-peek">
+			<li ng-repeat="face in facesModel.faces">
+				<img src={[face]} />
+			</li>
+		</ul>
+	</div>
 	
 </section>

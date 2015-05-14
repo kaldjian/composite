@@ -7,18 +7,12 @@
 
 angular
     .module('compositeApp.controllers')
-    .controller('FacesCtrl', ['$scope', 'FaceStorageSrv', 'PeekStateSrv', function ($scope, FaceStorageSrv, PeekStateSrv) {
+    .controller('FacesCtrl', ['$scope', function ($scope) {
 
 
     /*******************
      * Data Management *
      *******************/
-    // Update view state for peek box
-    PeekStateSrv.updateState('faces');
-
-    // Get faces
-    $scope.faces = FaceStorageSrv.getFaces();
-
 
 
 
@@ -34,7 +28,7 @@ angular
     /***********
      * Styling *
      ***********/
-     $scope.cropFaces = function() {
+    $scope.cropFaces = function() {
         $('ul.faces li').each(function() {
             var width = $(this).children('img').width();
             $(this).height(width);

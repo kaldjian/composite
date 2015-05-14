@@ -24,7 +24,7 @@ header {
   header div.header-inner {
     margin: 0 auto;
     padding: 8px 0 6px 0;
-    width: 90%;
+    width: calc(100% - 50px);
     overflow: auto; }
     header div.header-inner div.header-branding {
       float: left; }
@@ -64,86 +64,64 @@ header {
           margin-right: 0; }
 
 main.faces {
-  padding-top: 40px; }
+  padding-top: 40px;
+  background-color: #515151;
+  height: calc(100% - 40px); }
   main.faces section.face-grid {
     width: 100%; }
     main.faces section.face-grid ul.faces {
       width: 100%;
-      overflow: auto;
-      background-color: #333; }
+      background-color: #515151;
+      overflow: auto; }
       main.faces section.face-grid ul.faces li {
         float: left;
         margin: 4px 4px 0 0;
         width: calc((100% - (10 * 4px) - 4px) / 10);
         list-style: none;
-        background-color: #333;
+        background-color: #373737;
         overflow: hidden; }
         main.faces section.face-grid ul.faces li img {
           width: 100%; }
       main.faces section.face-grid ul.faces li:nth-child(10n+1) {
         margin-left: 4px; }
-  main.faces section.map-peek {
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
-    width: 240px;
-    height: 240px;
-    background-color: #333;
-    border-radius: 3px; }
-    main.faces section.map-peek div {
-      text-align: center; }
-      main.faces section.map-peek div span {
-        position: relative;
-        top: 110px;
-        color: #fff; }
 
 html, body, div#content, main.map, section.google-map, #map-canvas {
   height: 100%; }
 
 main.map {
-  padding-top: 40px; }
-  main.map section.face-peek {
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
-    width: 240px;
-    height: 240px;
-    background-color: #333;
-    border-radius: 3px; }
-    main.map section.face-peek div {
-      text-align: center; }
-      main.map section.face-peek div span {
-        position: relative;
-        top: 110px;
-        color: #fff; }
+  padding-top: 40px;
+  background-color: #515151;
+  height: calc(100% - 40px); }
 
 section.peek {
   position: fixed;
-  bottom: 10px;
-  left: 10px;
-  width: 240px;
-  height: 240px;
+  bottom: 25px;
+  left: 25px;
+  width: 242px;
+  height: 242px;
   background-color: #333;
-  border-radius: 3px; }
-  section.peek div#peek-canvas {
+  border: 3px solid #fff;
+  border-radius: 3px;
+  box-shadow: 1px 1px 2px 1px #aaa; }
+  section.peek div#peek-map, section.peek div#peek-faces {
     width: 100%;
     height: 100%; }
-    section.peek div#peek-canvas ul.faces-peek {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background-color: #333; }
-      section.peek div#peek-canvas ul.faces-peek li {
-        float: left;
-        margin: 2px 2px 0 0;
-        width: calc((100% - (6 * 2px) - 2px) / 6);
-        list-style: none;
-        background-color: #333;
-        overflow: hidden; }
-        section.peek div#peek-canvas ul.faces-peek li img {
-          width: 100%; }
-      section.peek div#peek-canvas ul.faces-peek li:nth-child(6n+1) {
-        margin-left: 2px; }
+  section.peek div#peek-faces ul.faces-peek {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #333; }
+    section.peek div#peek-faces ul.faces-peek li {
+      float: left;
+      margin: 2px 2px 0 0;
+      width: calc((100% - (6 * 2px) - 2px) / 6);
+      list-style: none;
+      background-color: #333;
+      overflow: hidden; }
+      section.peek div#peek-faces ul.faces-peek li img {
+        width: 100%; }
+    section.peek div#peek-faces ul.faces-peek li:nth-child(6n+1) {
+      margin-left: 2px; }
 
 /***********
  * Globals *

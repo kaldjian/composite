@@ -1,5 +1,7 @@
 main.faces {
 	padding-top: 40px;
+	background-color: lighten($header-color, 10%);
+	height: calc(100% - 40px);
 
 
 	section.face-grid {
@@ -7,15 +9,15 @@ main.faces {
 
 		ul.faces {
 			width: 100%;
+			background-color: lighten($header-color, 10%);
 			overflow: auto;
-			background-color: #333;
 
 			li {
 				float: left;
 				margin: 4px 4px 0 0;
 				width: calc((100% - (10 * 4px) - 4px) / 10);
 				list-style: none;
-				background-color: #333;
+				background-color: $header-color;
 				overflow: hidden;
 
 				img {
@@ -24,27 +26,6 @@ main.faces {
 			}
 			li:nth-child(10n+1) {
 				margin-left: 4px;
-			}
-		}
-	}
-
-
-	section.map-peek {
-		position: fixed;
-		bottom: 10px;
-		left: 10px;
-		width: 240px;
-		height: 240px;
-		background-color: #333;
-		border-radius: 3px;
-
-		div {
-			text-align: center;
-
-			span {
-				position: relative;
-				top: 110px;
-				color: #fff;
 			}
 		}
 	}

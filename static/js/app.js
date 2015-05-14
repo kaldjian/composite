@@ -29,6 +29,6 @@ app.config(['$interpolateProvider', '$routeProvider',
                 controller: 'FacesCtrl'
             }).
             otherwise({
-                redirectTo: '/map'
+                redirectTo: '/faces'
             });
     }]);
