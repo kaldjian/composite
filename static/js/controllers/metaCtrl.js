@@ -7,7 +7,7 @@
 
 angular
     .module('compositeApp.controllers')
-    .controller('MetaCtrl', ['$scope', '$location', 'ManipulateMapModel', 'ManipulateFacesModel', function ($scope, $location, ManipulateMapModel, ManipulateFacesModel) {
+    .controller('MetaCtrl', ['$scope', '$location', 'ManipulateMapModel', 'ManipulateFacesModel', 'ManipulateConstraintsModel', function ($scope, $location, ManipulateMapModel, ManipulateFacesModel, ManipulateConstraintsModel) {
 
 
     /*******************
@@ -23,6 +23,8 @@ angular
     $scope.facesModel = {
         faces: {},
     };
+    // Constraints model
+    $scope.constraintsModel = {}
     // Site State model
     $scope.siteStateModel = {
         activeView: $location.path().replace('/', ''),
@@ -30,15 +32,22 @@ angular
 
     // Initialize map model
     ManipulateMapModel.initialize().then(function(response) {
-        $scope.mapModel = response;        
+        $scope.mapModel = response;
 
-        // Once map model is initialized, update faces model
-        ManipulateFacesModel.update($scope.mapModel).then(function(response) {
-            $scope.facesModel.faces = response;
-            $scope.$apply();
+        // Once map model is initialized, update constraints model
+        ManipulateConstraintsModel.update($scope.mapModel).then(function(response) {
+            $scope.constraintsModel = response;
+
+            // Once constraints model is initialized, update faces model
+            ManipulateFacesModel.update($scope.mapModel).then(function(response) {
+                $scope.facesModel.faces = response;
+                $scope.$apply();
+            }, function(error) {
+                console.log(error);
+            });
         }, function(error) {
             console.log(error);
-        });
+        });   
     }, function(error) {
         console.log(error);
     });
