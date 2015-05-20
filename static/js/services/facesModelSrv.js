@@ -1,24 +1,21 @@
-/**********************************
- * Manipulate Faces Model Service *
- *********************************/
+/***********************
+ * Faces Model Service *
+ ***********************/
 
 'use strict';
 
 
 angular
     .module('compositeApp.services')
-    .factory('ManipulateFacesModel', ['$http', function ($http) {
+    .factory('FacesModelSrv', ['$http', function ($http) {
 
 
 
         // Update faces model
-        function update(mapModel) {
+        function update(constraintsModel) {
             return new Promise(function(resolve, reject) {
-                var facesModel = {
-                    faces: {},
-                }
-                $http.post('/instagram', {"lat": mapModel.center.lat(),
-                                          "lng": mapModel.center.lng()})
+                $http.post('/instagram', {"lat": constraintsModel.location.lat(),
+                                          "lng": constraintsModel.location.lng()})
                     .success(function(results) {
                         resolve(results);
                     })

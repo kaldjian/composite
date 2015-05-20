@@ -7,50 +7,55 @@
 
 angular
     .module('compositeApp.controllers')
-    .controller('MetaCtrl', ['$scope', '$location', 'ManipulateMapModel', 'ManipulateFacesModel', 'ManipulateConstraintsModel', function ($scope, $location, ManipulateMapModel, ManipulateFacesModel, ManipulateConstraintsModel) {
+    .controller('MetaCtrl', ['$scope', '$location', 'MapModelSrv', 'FacesModelSrv', 'ConstraintsModelSrv', function ($scope, $location, MapModelSrv, FacesModelSrv, ConstraintsModelSrv) {
 
 
-    /*******************
-     * Data Management *
-     *******************/
+    /***********
+     * Models  *
+     ***********/
 
-    // Map model
-    $scope.mapModel = {
-        center: undefined,
-        zoom: undefined,
-    };
-    // Faces model
-    $scope.facesModel = {
-        faces: {},
-    };
-    // Constraints model
-    $scope.constraintsModel = {}
     // Site State model
     $scope.siteStateModel = {
         activeView: $location.path().replace('/', ''),
     };
+    // Map model
+    $scope.mapModel = {
+        zoom: undefined,
+        center: undefined,
+        bounds: undefined,
+    }
+    // Constraints model
+    $scope.constraintsModel = {
+        location: undefined,
+        distance: undefined,
+        date: undefined,
+    }
+    $scope.facesModel = {
+        faces: [],
+    }
 
-    // Initialize map model
-    ManipulateMapModel.initialize().then(function(response) {
-        $scope.mapModel = response;
 
-        // Once map model is initialized, update constraints model
-        ManipulateConstraintsModel.update($scope.mapModel).then(function(response) {
+    /*************************
+     * Model initializations *
+     *************************/
+
+    // Map model initialization
+    MapModelSrv.initialize().then(function(response) {
+        console.log(response);
+
+        // Constraints model initialization
+        ConstraintsModelSrv.update($scope.mapModel, new Date()).then(function(response) {
             $scope.constraintsModel = response;
 
-            // Once constraints model is initialized, update faces model
-            ManipulateFacesModel.update($scope.mapModel).then(function(response) {
+            // Faces model initialization
+            FacesModelSrv.update($scope.constraintsModel).then(function(response) {
                 $scope.facesModel.faces = response;
                 $scope.$apply();
-            }, function(error) {
-                console.log(error);
-            });
-        }, function(error) {
-            console.log(error);
-        });   
-    }, function(error) {
-        console.log(error);
-    });
+
+    // Errors from each initialization
+            }, function(error) { console.log(error); });
+        }, function(error) { console.log(error); });   
+    }, function(error) { console.log(error); });
 
 
 
