@@ -1,11 +1,11 @@
-<section class="peek" ng-click="toggleActiveView()" ng-init="initializePeek()">
+<section class="peek" ng-click="toggleActiveView()" ng-init="initialize()">
 
-	<div id="peek-map"></div>
+	<div ng-show="siteStateModel.activeView == 'faces'" id="peek-map"></div>
 
-	<div id="peek-faces">
+	<div ng-show="siteStateModel.activeView == 'map'" id="peek-faces">
 		<ul class="faces-peek">
 			<li ng-repeat="face in facesModel.faces">
-				<img src={[face]} />
+				<img ng-src={[face]} />
 			</li>
 		</ul>
 	</div>

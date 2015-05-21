@@ -1,4 +1,4 @@
-<header>
+<header ng-init="initialize()">
 	<div class="header-inner">
 		<div class="header-branding">
 			<h1>COMPOSITE</h1>
@@ -12,7 +12,7 @@
 					</li>
 					<li>
 						<i class="fa fa-calendar"></i>
-						<input type="text" name="date" placeholder="Date" />
+						<input id="datepicker" type="text">
 					</li>
 				</ul>
 			</form>
