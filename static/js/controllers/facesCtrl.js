@@ -14,6 +14,8 @@ angular
      * Data Management *
      *******************/
 
+    // Switch active view
+    $scope.siteStateModel.activeView = 'faces';
 
 
     /******************

@@ -13,71 +13,154 @@ angular
     /*******************
      * Data Management *
      *******************/
-     
-    // Initialize peek box
-    $scope.initializePeek = function() {
-        switch ($scope.siteStateModel.activeView) {
-            case 'faces':
-                implementView('faces');
-                break;
-            case 'map':
-                implementView('map');
-                break;
-        }
-    };
 
-    // Implement correct peek box
-    var implementView = function(activeView) {
-        switch (activeView) {
+    $scope.initialize = function() {
 
-            // implement faces view's peek box
-            case 'faces':
-
-                // show the appropriate div
-                $('div#peek-faces').hide();
-                $('div#peek-map').show();
-
-                // whenever the map model changes, update the map
-                $scope.$watch('mapModel', function() {
-
-                    // create map options
-                    var mapOptions = {
-                        center: $scope.mapModel.center,
-                        disableDefaultUI: true,
-                        disableDoubleClickZoom: true,
-                        draggable: false,
-                        scrollwheel: false,
-                        zoom: $scope.mapModel.zoom - 1,
-                    };
-
-                    // create the map instance
-                    var peekMap = new google.maps.Map(document.getElementById('peek-map'), mapOptions);
-
-                    // when it's loaded, update the mapModel's bounds
-                    google.maps.event.addListener(peekMap, 'tilesloaded', function() {
-                        $scope.mapModel = MapModelSrv.setBounds($scope.mapModel, peekMap.getBounds());
-                        $scope.$apply();
-                    });
-                });
-                break;
-
-            // implement map view's peek box
-            case 'map':
-
-                // show the appropriate div
-                $('div#peek-map').hide();
-                $('div#peek-faces').show();
-
-                // keep checking for faces until there are some
-                var checkForFaces = window.setInterval(function() {
-                    if ($scope.facesModel.faces.length > 0){
-                        clearInterval(checkForFaces);
-                        $scope.cropFaces();
+        // create map options
+        var mapOptions = {
+            center: $scope.mapModel.center,
+            disableDefaultUI: true,
+            disableDoubleClickZoom: true,
+            draggable: false,
+            scrollwheel: false,
+            styles: [
+                    {
+                        "stylers": [ 
+                            {
+                                "visibility": "on"
+                            },
+                            {
+                                "saturation": -100
+                            },
+                            {
+                                "gamma": 0.54
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road",
+                        "elementType": "labels.icon",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "water",
+                        "stylers": [
+                            {
+                                "color": "#373737"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "labels.icon",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "labels.text",
+                        "stylers": [
+                            {
+                                "visibility": "simplified"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road",
+                        "elementType": "geometry.fill", 
+                        "stylers": [
+                            {
+                                "color": "#ffffff"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.local",
+                        "elementType": "labels.text",
+                        "stylers": [
+                            {
+                                "visibility": "simplified"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "water",
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                            {
+                                "color": "#ffffff"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "transit.line",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "gamma": 0.48
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "transit.station",
+                        "elementType": "labels.icon",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                            {
+                                "gamma": 7.18
+                            }
+                        ]
                     }
-                }, 100);
-                break;
-        }
+                ],
+            zoom: $scope.mapModel.zoom - 1,
+        };
+
+        // whenever the map model changes, update the map
+        $scope.$watch('mapModel', function() {
+
+            // update map options
+            mapOptions.center = $scope.mapModel.center;
+            mapOptions.zoom = $scope.mapModel.zoom - 1;
+
+            // recreate the map instance
+            var peekMap = new google.maps.Map(document.getElementById('peek-map'), mapOptions);
+
+            // when it's loaded, update the mapModel's bounds (relevant when /faces is visited first)
+            google.maps.event.addListener(peekMap, 'tilesloaded', function() {
+                $scope.mapModel = MapModelSrv.setBounds($scope.mapModel, peekMap.getBounds());
+                $scope.$apply();
+            });
+
+            // whenever the map's resized (shown from hidden), trigger resize event
+            $scope.$watch('siteStateModel.activeView', function() {
+
+                if ($scope.siteStateModel.activeView == 'faces') {
+                    setTimeout(function() {
+                        google.maps.event.trigger(peekMap, 'resize');
+                        console.log('showing map');
+                    }, 100);
+                }
+            }, true);
+
+        }, true);
     };
+
+
 
 
 
@@ -91,13 +174,9 @@ angular
         switch ($scope.siteStateModel.activeView) {
             case 'faces':
                 window.location.href = "/#/map";
-                $scope.siteStateModel.activeView = 'map';
-                implementView('map');
                 break;
             case 'map':
                 window.location.href = "/#/faces";
-                $scope.siteStateModel.activeView = 'faces';
-                implementView('faces');
                 break;
         }
     };
