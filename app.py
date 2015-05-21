@@ -3,6 +3,7 @@ from instagram.client import InstagramAPI
 from flask.ext.sqlalchemy import SQLAlchemy
 import os
 import json
+import face_detection
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -32,6 +33,8 @@ def instagram():
 	your_location = api.media_search(count=100, lat=lat, lng=lng, distance=1500)
 
 	for media in your_location:
+		url = media.images['standard_resolution'].url
+		detect_faces(url)
 		results.append(media.images['standard_resolution'].url)
 
 	results = json.dumps(results)
