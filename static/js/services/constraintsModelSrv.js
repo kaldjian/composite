@@ -14,12 +14,22 @@ angular
         // Update constraints model
         function update(mapModel, newDate) {
             return new Promise(function(resolve, reject) {
-                var dx = mapModel.center.lat() - mapModel.bounds.getSouthWest().lat();
-                var dy = mapModel.center.lng() - mapModel.bounds.getSouthWest().lng();
-                var dmin = Math.min(dx, dy);
+
+                // Create LatLng for [-1, 0] and [0, -1] of the bounds quadrant
+                var leftCenter = new google.maps.LatLng(mapModel.bounds.getSouthWest().lat(), mapModel.center.lng());
+                var centerBottom = new google.maps.LatLng(mapModel.center.lat(), mapModel.bounds.getSouthWest().lng());
+
+                // Calculate dx and dy
+                var dx = google.maps.geometry.spherical.computeDistanceBetween(mapModel.center, leftCenter);
+                var dy = google.maps.geometry.spherical.computeDistanceBetween(mapModel.center, centerBottom);
+
+                // Use whichever d that's smaller
+                var d = Math.min(dx, dy);
+
+                // Update constraints  odel
                 var constraintsModel = {
                     location: mapModel.center,
-                    distance: dmin,
+                    distance: d,
                     date: newDate
                 };
                 resolve(constraintsModel);

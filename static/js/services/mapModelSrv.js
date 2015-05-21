@@ -18,23 +18,33 @@ angular
         function initialize() {
             return new Promise(function(resolve, reject) {
 
-                // iniitalize zoom
-                setZoom(15);
+                // initialize model
+                var mapModel = {};
 
-                // initialize center
+                // iniitalize model's zoom
+                mapModel = setZoom(mapModel, 15);
+
+                // initialize model's center
                 if (navigator.geolocation) {
+
+                    // with geolocation
                     navigator.geolocation.getCurrentPosition(function(position) {
-                        setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+                        mapModel = setCenter(mapModel, new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+                        resolve(mapModel);
                     }, function() {
-                        setCenter(new google.maps.LatLng(42.056459, -87.675267));
+
+                        // or default center
+                        mapModel = setCenter(mapModel, new google.maps.LatLng(42.056459, -87.675267));
+                        resolve(mapModel);
                     });
-                    resolve('initialized map model');
                 }
+
+                // default center
                 else {
-                    setCenter(new google.maps.LatLng(42.056459, -87.675267));
-                    resolve('initialized map model');
+                    setCenter(mapModel, new google.maps.LatLng(42.056459, -87.675267));
+                    resolve(mapModel);
                 }
-            }   
+            });   
         };
 
 
@@ -43,25 +53,21 @@ angular
          * Setters *
          ***********/
         // Set map model's zoom
-        function setZoom(zoom) {
-            return new Promise(function(resolve, reject) {
-                $scope.mapModel.zoom = zoom;
-            });
+        function setZoom(model, zoom) {
+            model.zoom = zoom;
+            return model;
         };
 
         // Set map model's center
-        function setCenter(center) {
-            return new Promise(function(resolve, reject) {
-                $scope.mapModel.center = center;
-            });
+        function setCenter(model, center) {
+            model.center = center;
+            return model;
         };
 
         // Set map model's bounds
-        function setBounds(bounds) {
-            return new Promise(function(resolve, reject) {
-                $scope.mapModel.bounds = bounds;
-                console.log($scope.mapModel.bounds);
-            });
+        function setBounds(model, bounds) {
+            model.bounds = bounds;
+            return model;
         };
 
 

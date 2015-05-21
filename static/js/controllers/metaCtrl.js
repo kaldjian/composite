@@ -41,20 +41,28 @@ angular
 
     // Map model initialization
     MapModelSrv.initialize().then(function(response) {
-        console.log(response);
+        $scope.mapModel = response;
+        $scope.$apply();
 
-        // Constraints model initialization
-        ConstraintsModelSrv.update($scope.mapModel, new Date()).then(function(response) {
-            $scope.constraintsModel = response;
+        // Wait to initialize constraints model until map model bounds are set
+        var checkForBounds = window.setInterval(function() {
+            if (typeof $scope.mapModel.bounds != 'undefined') {
+                clearInterval(checkForBounds);
 
-            // Faces model initialization
-            FacesModelSrv.update($scope.constraintsModel).then(function(response) {
-                $scope.facesModel.faces = response;
-                $scope.$apply();
+                //Constraints model initialization
+                ConstraintsModelSrv.update($scope.mapModel, new Date()).then(function(response) {
+                    $scope.constraintsModel = response;
 
-    // Errors from each initialization
-            }, function(error) { console.log(error); });
-        }, function(error) { console.log(error); });   
+                    // Faces model initialization
+                    FacesModelSrv.update($scope.constraintsModel).then(function(response) {
+                        $scope.facesModel.faces = response;
+                        $scope.$apply();
+
+                    // Errors from each initialization
+                    }, function(error) { console.log(error); });
+                }, function(error) { console.log(error); });  
+            }
+        }, 100); 
     }, function(error) { console.log(error); });
 
 

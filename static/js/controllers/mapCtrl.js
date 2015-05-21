@@ -7,7 +7,7 @@
 
 angular
     .module('compositeApp.controllers')
-    .controller('MapCtrl', ['$scope', 'FacesModelSrv', function ($scope, ManipulateFacesModel) {
+    .controller('MapCtrl', ['$scope', 'FacesModelSrv', 'MapModelSrv', function ($scope, FacesModelSrv, MapModelSrv) {
 
 
         /*******************
@@ -26,7 +26,7 @@ angular
                     zoom: $scope.mapModel.zoom,
                 };
                 map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-                MapModelSrv.setBounds(map.getBounds());
+                // MapModelSrv.setBounds(map.getBounds());
 
                 google.maps.event.addListener(map, 'dragend', function() {
                     // Update state

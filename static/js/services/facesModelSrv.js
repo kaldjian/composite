@@ -14,8 +14,9 @@ angular
         // Update faces model
         function update(constraintsModel) {
             return new Promise(function(resolve, reject) {
-                $http.post('/instagram', {"lat": constraintsModel.location.lat(),
-                                          "lng": constraintsModel.location.lng()})
+                $http.post('/instagram', {"lat":  constraintsModel.location.lat(),
+                                          "lng":  constraintsModel.location.lng(),
+                                          "dist": constraintsModel.distance})
                     .success(function(results) {
                         resolve(results);
                     })
