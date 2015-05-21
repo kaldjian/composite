@@ -130,6 +130,7 @@ angular
             zoom: $scope.mapModel.zoom - 1,
         };
 
+        // map model not completely initialized immediately, need to wait until it is
         var checkforMapModel = window.setInterval(function() {
             if (typeof $scope.mapModel.center != 'undefined') {
 
@@ -140,7 +141,7 @@ angular
                 // create map instance
                 var peekMap = new google.maps.Map(document.getElementById('peek-map'), mapOptions);
 
-                // when it's loaded, update the mapModel's bounds (relevant when /faces is visited first)
+                // when it's loaded, initialize the mapModel's bounds
                 google.maps.event.addListener(peekMap, 'tilesloaded', function() {
                     $scope.mapModel = MapModelSrv.setBounds($scope.mapModel, peekMap.getBounds());
                     $scope.$apply();
