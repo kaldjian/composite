@@ -5,7 +5,7 @@
 	<div ng-show="siteStateModel.activeView == 'map'" id="peek-faces">
 		<ul class="faces-peek">
 			<li ng-repeat="face in facesModel.faces">
-				<img src={[face]} />
+				<img ng-src={[face]} />
 			</li>
 		</ul>
 	</div>
