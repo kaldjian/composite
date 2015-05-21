@@ -130,34 +130,42 @@ angular
             zoom: $scope.mapModel.zoom - 1,
         };
 
-        // whenever the map model changes, update the map
-        $scope.$watch('mapModel', function() {
+        var checkforMapModel = window.setInterval(function() {
+            if (typeof $scope.mapModel.center != 'undefined') {
 
-            // update map options
-            mapOptions.center = $scope.mapModel.center;
-            mapOptions.zoom = $scope.mapModel.zoom - 1;
+                // update map options
+                mapOptions.center = $scope.mapModel.center;
+                mapOptions.zoom = $scope.mapModel.zoom - 1;
 
-            // recreate the map instance
-            var peekMap = new google.maps.Map(document.getElementById('peek-map'), mapOptions);
+                // create map instance
+                var peekMap = new google.maps.Map(document.getElementById('peek-map'), mapOptions);
 
-            // when it's loaded, update the mapModel's bounds (relevant when /faces is visited first)
-            google.maps.event.addListener(peekMap, 'tilesloaded', function() {
-                $scope.mapModel = MapModelSrv.setBounds($scope.mapModel, peekMap.getBounds());
-                $scope.$apply();
-            });
+                // when it's loaded, update the mapModel's bounds (relevant when /faces is visited first)
+                google.maps.event.addListener(peekMap, 'tilesloaded', function() {
+                    $scope.mapModel = MapModelSrv.setBounds($scope.mapModel, peekMap.getBounds());
+                    $scope.$apply();
+                });
 
-            // whenever the map's resized (shown from hidden), trigger resize event
-            $scope.$watch('siteStateModel.activeView', function() {
+                // update the map whenever the map model's updated
+                $scope.$watch('mapModel', function() {
+                    peekMap.setCenter($scope.mapModel.center);
+                    peekMap.setZoom($scope.mapModel.zoom - 1);
+                }, true);
 
-                if ($scope.siteStateModel.activeView == 'faces') {
-                    setTimeout(function() {
-                        google.maps.event.trigger(peekMap, 'resize');
-                        console.log('showing map');
-                    }, 100);
-                }
-            }, true);
+                // when showing map peek on faces view, trigger resize event
+                $scope.$watch('siteStateModel.activeView', function() {
 
-        }, true);
+                    if ($scope.siteStateModel.activeView == 'faces') {
+                        setTimeout(function() {
+                            google.maps.event.trigger(peekMap, 'resize');
+                        }, 100);
+                    }
+                }, true);
+
+                // stop checking for map model
+                clearInterval(checkforMapModel);
+            }
+        }, 100);
     };
 
 
