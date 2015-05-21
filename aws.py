@@ -9,5 +9,5 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 conn = S3Connection(app.config['AWS_ACCESS_KEY_ID'], app.config['AWS_SECRET_ACCESS_KEY'])
 
 k = Key(conn.get_bucket('nucomposite'))
-k.key = 'testkey'
-k.set_contents_from_string('This is a test of S3')
+k.key = 'file'
+k.set_contents_from_filename('Larry.jpg')

@@ -3,6 +3,8 @@ from instagram.client import InstagramAPI
 from flask.ext.sqlalchemy import SQLAlchemy
 import os
 import json
+from boto.s3.connection import S3Connection
+from boto.s3.key import Key
 
 
 app = Flask(__name__)
@@ -32,8 +34,12 @@ def instagram():
 	lng = data["lng"]
 	your_location = api.media_search(count=100, lat=lat, lng=lng, distance=1500)
 
-	for media in your_location:
-		results.append(media.images['standard_resolution'].url)
+	# pull photos directly from the IG servers
+	# for media in your_location:
+	# 	results.append(media.images['standard_resolution'].url)
+
+	# face detection route w/out face detection
+
 
 	results = json.dumps(results)
 
