@@ -54,10 +54,6 @@ angular
                                 reject(error);
                             });
                     }
-
-                    else {
-                        console.log('Request in progress!');
-                    }
                 }, 50);
             });
         };

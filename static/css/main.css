@@ -116,7 +116,6 @@ header {
         overflow: auto; }
         header div.header-inner div.header-inputs form ul li {
           float: left;
-          margin-right: 7px;
           overflow: auto; }
           header div.header-inner div.header-inputs form ul li i {
             float: left;
@@ -135,8 +134,14 @@ header {
             outline: none; }
           header div.header-inner div.header-inputs form ul li input:focus {
             background-color: #464646; }
-        header div.header-inner div.header-inputs form ul li:last-child {
+        header div.header-inner div.header-inputs form ul li:nth-child(1) {
+          margin-right: 15px; }
+          header div.header-inner div.header-inputs form ul li:nth-child(1) input {
+            width: 230px; }
+        header div.header-inner div.header-inputs form ul li:nth-child(2) {
           margin-right: 0; }
+          header div.header-inner div.header-inputs form ul li:nth-child(2) input {
+            width: 70px; }
 
 main.faces {
   padding-top: 40px;

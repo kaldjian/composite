@@ -17,6 +17,9 @@ angular
     // Initialize datepicker
     $scope.initialize = function() {
 
+
+        /* Datepicker */
+
         // Set datepicker options and handlers
         $("#datepicker").datepicker({
             inline: true,
@@ -37,6 +40,20 @@ angular
                 clearInterval(checkForDate);
             }
         }, 100);
+
+
+
+        /* Autocomplete */
+
+        // Specify input element
+        var input = document.getElementById('locationPicker');
+
+        // Specify options
+        var options = {};
+
+        // Instantiate autocomplete
+        var autocomplete = new google.maps.places.Autocomplete(input, options);
+
     };
 
 
