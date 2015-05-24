@@ -1,7 +1,7 @@
 main.faces {
 	padding-top: 40px;
 	background-color: lighten($header-color, 10%);
-	height: calc(100% - 40px);
+	min-height: calc(100% - 40px);
 
 
 	section.face-grid {
