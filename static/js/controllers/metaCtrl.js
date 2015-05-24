@@ -55,7 +55,9 @@ angular
 
                     // Faces model initialization
                     FacesModelSrv.update($scope.constraintsModel).then(function(response) {
+                        console.log("**** Initialize faces model")
                         $scope.facesModel.faces = response;
+                        console.log("facesModel.faces", $scope.facesModel.faces)
                         $scope.$apply();
 
                     // Errors from each initialization

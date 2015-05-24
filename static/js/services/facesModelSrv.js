@@ -18,6 +18,7 @@ angular
                                           "lng":  constraintsModel.location.lng(),
                                           "dist": constraintsModel.distance})
                     .success(function(results) {
+                        //console.log("RESULTS: ", results)
                         resolve(results);
                     })
                     .error(function(error) {

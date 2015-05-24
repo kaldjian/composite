@@ -1,6 +1,6 @@
 import sys
 import cv2
-import urllib, cStringIO
+import urllib2, cStringIO
 import numpy as np
 
 #Command line argument for image path
@@ -19,34 +19,37 @@ right_eye_cascade = cv2.CascadeClassifier(haarPath + rightEyePath)
 
 
 def detect(path):
-    req = urllib.urlopen(path)
+    try:
+        req = urllib2.urlopen(path, timeout=3)
+    except urllib2.URLError:
+        print "Returning empty results"
+        return [], None, None
     arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
     color = cv2.imdecode(arr, -1)
-    #cv2.imwrite("color.jpg", color)
     gray = cv2.cvtColor(color, cv2.COLOR_BGR2GRAY)
 
 	#Detect faces in the image
     faces = face_cascade.detectMultiScale(gray, 1.3, 4, cv2.cv.CV_HAAR_SCALE_IMAGE, (20, 20))
     print ("Number of faces: ", len(faces))
     if len(faces) == 0:
-	   return [], gray
+        return [], gray, color
+	       
 
     faces[:, 2:] += faces[:, :2]
     return faces, gray, color
 
 
-def faceBox(faces, gray, color):
+def faceBox(faces, gray, color, pid):
     img_list = []
-    path = 'default.jpg'
     # save each face in the image
-    imageToPrint = path.split('.')[0]
     count = 0
     for x1, y1, x2, y2 in faces:
         width = x2 - x1
         height = y2 - y1
         crop_img = color[y1:y1 + height, x1:x1 + width]
-        cv2.imwrite(imageToPrint + "_face_" + str(count) + ".jpg", crop_img)
-        img_list.append(crop_img)
+        img_path = "static/img/cropped_faces/" + pid + "_face_" + str(count) + ".jpg"
+        cv2.imwrite(img_path, crop_img)
+        img_list.append(img_path)
         count = count + 1
 
     #print ("Number of faces: ", count)
@@ -69,9 +72,13 @@ def faceBox(faces, gray, color):
 #         for (x, y, w, h) in left_eye:
 #             cv2.rectangle(color, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
-def detect_faces(path):
+def detect_faces(path, pid):
     faces, img, color = detect(path)
-    face_list = faceBox(faces, img, color, path)
+    if not faces == []:
+        face_list = faceBox(faces, img, color, pid)
+        return face_list
+    else:
+        return faces
     #return face_list
     #print "number of faces: ", numberOfFaces
 
