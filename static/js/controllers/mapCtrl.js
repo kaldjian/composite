@@ -135,6 +135,9 @@ angular
             var checkforMapModel = window.setInterval(function() {
                 if (typeof $scope.mapModel.center != 'undefined') {
 
+                    // stop checking for map model
+                    clearInterval(checkforMapModel);
+
                     // update map options
                     mapOptions.center = $scope.mapModel.center;
                     mapOptions.zoom = $scope.mapModel.zoom - 1;
@@ -171,8 +174,34 @@ angular
                         }, function(error) { console.log(error); });
                     });
 
-                    // stop checking for map model
-                    clearInterval(checkforMapModel);
+                    // update the map whenever the map model's updated
+                    $scope.$watch('mapModel.center', function() {
+                        map.setCenter($scope.mapModel.center);
+                        map.setZoom($scope.mapModel.zoom);
+                        $scope.mapModel = MapModelSrv.setBounds($scope.mapModel, map.getBounds());
+
+                        // Ensure that everything's initialized
+                        var checkForDate = window.setInterval(function() {
+                            if (typeof $scope.constraintsModel.date != 'undefined') {
+
+                                // Stop checking
+                                clearInterval(checkForDate);
+
+                                // Update constraints model
+                                ConstraintsModelSrv.update($scope.mapModel, $scope.constraintsModel.date).then(function(response) {
+                                    $scope.constraintsModel = response;
+
+                                    // Update faces model
+                                    FacesModelSrv.update($scope.constraintsModel).then(function(response) {
+                                        $scope.facesModel.faces = response;
+                                        $scope.$apply();
+
+                                    // Display any errors
+                                    }, function(error) { console.log(error); });
+                                }, function(error) { console.log(error); });
+                            }
+                        }, 100);
+                    }, true);
                 }
             }, 100);
         };
