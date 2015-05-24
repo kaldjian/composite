@@ -7,7 +7,7 @@
 
 angular
     .module('compositeApp.controllers')
-    .controller('HeaderCtrl', ['$scope', function ($scope) {
+    .controller('HeaderCtrl', ['$scope', 'ConstraintsModelSrv', 'FacesModelSrv', function ($scope, ConstraintsModelSrv, FacesModelSrv) {
 
 
     /*******************
@@ -16,6 +16,8 @@ angular
 
     // Initialize datepicker
     $scope.initialize = function() {
+
+        // Set datepicker options and handlers
         $("#datepicker").datepicker({
             inline: true,
             showOtherMonths: true,
@@ -27,7 +29,14 @@ angular
                 handleDatepickerClose();
             }
         });
-        $('#datepicker').datepicker("setDate", new Date());
+
+        // Wait for constratints model date to be initialized, initialize datepicker date
+        var checkForDate = window.setInterval(function() {
+            if (typeof $scope.constraintsModel.date != 'undefined') {
+                $('#datepicker').datepicker("setDate", $scope.constraintsModel.date);
+                clearInterval(checkForDate);
+            }
+        }, 100);
     };
 
 
@@ -39,6 +48,20 @@ angular
     // User changes date
     var handleDateChange = function(dateText) {
         console.log(dateText);
+
+        // Constraints model update
+        ConstraintsModelSrv.update($scope.mapModel, new Date(dateText)).then(function(response) {
+            $scope.constraintsModel = response;
+
+            // Faces model update
+            FacesModelSrv.update($scope.constraintsModel).then(function(response) {
+                $scope.facesModel.faces = response;
+                $scope.$apply();
+                console.log($scope.constraintsModel);
+
+            // Errors from each initialization
+            }, function(error) { console.log(error); });
+        }, function(error) { console.log(error); });  
     };
 
     // Otherwise datepicker can't open back up

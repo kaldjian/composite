@@ -30,7 +30,8 @@ def instagram():
 	lat = data["lat"]
 	lng = data["lng"]
 	dist = data["dist"]
-	your_location = api.media_search(count=100, lat=lat, lng=lng, distance=dist)
+	min_tstmp = data["min_timestamp"]
+	your_location = api.media_search(count=100, lat=lat, lng=lng, distance=dist, min_timestamp=min_tstmp)
 
 	for media in your_location:
 		results.append(media.images['standard_resolution'].url)

@@ -49,7 +49,7 @@ angular
             if (typeof $scope.mapModel.bounds != 'undefined') {
                 clearInterval(checkForBounds);
 
-                //Constraints model initialization
+                // Constraints model initialization
                 ConstraintsModelSrv.update($scope.mapModel, new Date()).then(function(response) {
                     $scope.constraintsModel = response;
 
