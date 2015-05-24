@@ -13,6 +13,9 @@
 /***********
  * Modules *
  ***********/
+/************
+ * Modules *
+ ************/
 div.ui-datepicker {
   margin: 0 0 0 -25px;
   padding: 0;
@@ -88,6 +91,29 @@ div.ui-datepicker {
       div.ui-datepicker table.ui-datepicker-calendar tbody tr:last-child {
         border: none; }
 
+.pac-container {
+  background-color: #494949;
+  border: 1px solid #373737;
+  box-shadow: none; }
+  .pac-container .pac-item {
+    color: #888;
+    background-color: #494949;
+    border: 1px solid #3f3f3f;
+    border-style: none none solid none;
+    cursor: pointer; }
+    .pac-container .pac-item .pac-icon {
+      display: none; }
+    .pac-container .pac-item .pac-item-query {
+      font-size: 11px;
+      color: #aaa; }
+      .pac-container .pac-item .pac-item-query .pac-matched {
+        color: #bababa; }
+  .pac-container .pac-item:last-child {
+    margin-bottom: 5px;
+    border-bottom: none; }
+  .pac-container .pac-item:hover {
+    background-color: #515151; }
+
 /************
  * Partials *
  ************/
@@ -135,9 +161,9 @@ header {
           header div.header-inner div.header-inputs form ul li input:focus {
             background-color: #464646; }
         header div.header-inner div.header-inputs form ul li:nth-child(1) {
-          margin-right: 15px; }
+          margin-right: 20px; }
           header div.header-inner div.header-inputs form ul li:nth-child(1) input {
-            width: 230px; }
+            width: 260px; }
         header div.header-inner div.header-inputs form ul li:nth-child(2) {
           margin-right: 0; }
           header div.header-inner div.header-inputs form ul li:nth-child(2) input {
