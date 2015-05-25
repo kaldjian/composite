@@ -187,6 +187,7 @@ main.faces {
         background-color: #373737;
         overflow: hidden; }
         main.faces section.face-grid ul.faces li img {
+          display: block;
           width: 100%; }
       main.faces section.face-grid ul.faces li:nth-child(10n+1) {
         margin-left: 4px; }
@@ -217,15 +218,16 @@ section.peek {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background-color: #333; }
+    background-color: #515151; }
     section.peek div#peek-faces ul.faces-peek li {
       float: left;
       margin: 2px 2px 0 0;
       width: calc((100% - (6 * 2px) - 2px) / 6);
       list-style: none;
-      background-color: #333;
+      background-color: #373737;
       overflow: hidden; }
       section.peek div#peek-faces ul.faces-peek li img {
+        display: block;
         width: 100%; }
     section.peek div#peek-faces ul.faces-peek li:nth-child(6n+1) {
       margin-left: 2px; }
