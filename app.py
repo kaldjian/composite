@@ -4,6 +4,10 @@ import os
 import json
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
+from parse_rest.connection import register
+from parse_rest.datatypes import Date, GeoPoint
+from parse_rest.datatypes import Object as ParseObject
+import urllib
 
 
 app = Flask(__name__)
@@ -25,21 +29,49 @@ def index():
 @app.route('/instagram', methods=['POST'])
 def instagram():
 	results = []
+
+	# ig connection
 	api = InstagramAPI(client_id=app.config['CLIENT_ID'], client_secret=app.config['CLIENT_SECRET'])
+
+	# parse connection
+	register(app.config['APPLICATION_ID'], app.config['REST_API_KEY'])
+
+	# s3 connection
+	conn = S3Connection(app.config['AWS_ACCESS_KEY_ID'], app.config['AWS_SECRET_ACCESS_KEY'])
 
 	data = json.loads(request.data.decode())
 	lat = data["lat"]
 	lng = data["lng"]
-	your_location = api.media_search(count=100, lat=lat, lng=lng, distance=1500)
+	
+	photos = api.media_search(count=100, lat=lat, lng=lng, distance=1500)
 
-	# pull photos directly from the IG servers
-	# for media in your_location:
-	# 	results.append(media.images['standard_resolution'].url)
+	class Face(ParseObject):
+		pass
 
-	# face detection route w/out face detection
-	conn = S3Connection(app.config['AWS_ACCESS_KEY_ID'], app.config['AWS_SECRET_ACCESS_KEY'])
-	k = Key(conn.get_bucket('nucomposite'))
+	for i in range(len(photos)):
+		urllib.urlretrieve(photos[i].images['standard_resolution'].url, "temp.jpg")
+		k = Key(conn.get_bucket('nucomposite'))
+		k.key = str(photos[i].id)
+		k.set_contents_from_filename('temp.jpg')
+		os.remove('temp.jpg')
 
+		aws_url = 'http://nucomposite.s3.amazonaws.com/' + str(photos[i].id)
+
+		to_save = Face(
+			url=aws_url,
+			timestamp = photos[i].created_time,
+			location = GeoPoint(latitude = photos[i].location.point.latitude, longitude = photos[i].location.point.longitude),
+			id = str(photos[i].id)
+			)
+		to_save.save()
+
+
+	# my_loc = GeoPoint(latitude=42.056459, longitude=-87.675267)
+	myquery = Face.Query.filter(location__nearSphere=my_loc)
+
+	for i in myquery:
+		results.append(i.url)
+	
 	results = json.dumps(results)
 
 	return results
