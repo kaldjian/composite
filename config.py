@@ -12,8 +12,6 @@ class Config(object):
     # AWS
     AWS_ACCESS_KEY_ID = aws_access
     AWS_SECRET_ACCESS_KEY = aws_secret
-    # SqLOL
-    SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
     # Parse
     APPLICATION_ID = parse_app_id
     REST_API_KEY = parse_api_key
