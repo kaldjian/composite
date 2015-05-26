@@ -7,7 +7,8 @@ from boto.s3.key import Key
 from parse_rest.connection import register
 from parse_rest.datatypes import Date, GeoPoint
 from parse_rest.datatypes import Object as ParseObject
-import urllib
+import requests
+import shutil
 
 
 app = Flask(__name__)
@@ -43,16 +44,22 @@ def instagram():
 	lat = data["lat"]
 	lng = data["lng"]
 	
-	photos = api.media_search(count=100, lat=lat, lng=lng, distance=1500)
+	photos = api.media_search(count=10, lat=lat, lng=lng, distance=1500)
 
 	class Face(ParseObject):
 		pass
 
 	for i in range(len(photos)):
-		urllib.urlretrieve(photos[i].images['standard_resolution'].url, "temp.jpg")
+		# urllib.urlretrieve(photos[i].images['standard_resolution'].url, "temp.jpg")
+		response = requests.get(photos[i].images['standard_resolution'].url, stream=True)
+		with open('temp.jpg', 'wb') as out_file:
+    			shutil.copyfileobj(response.raw, out_file)
+		del response
+		
 		k = Key(conn.get_bucket('nucomposite'))
 		k.key = str(photos[i].id)
 		k.set_contents_from_filename('temp.jpg')
+		
 		os.remove('temp.jpg')
 
 		aws_url = 'http://nucomposite.s3.amazonaws.com/' + str(photos[i].id)
@@ -66,7 +73,8 @@ def instagram():
 		to_save.save()
 
 
-	# my_loc = GeoPoint(latitude=42.056459, longitude=-87.675267)
+	my_loc = GeoPoint(latitude=lat, longitude=lng)
+
 	myquery = Face.Query.filter(location__nearSphere=my_loc)
 
 	for i in myquery:
