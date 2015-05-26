@@ -7,63 +7,78 @@
 
 angular
     .module('compositeApp.controllers')
-    .controller('MetaCtrl', ['$scope', '$location', 'MapModelSrv', 'FacesModelSrv', 'ConstraintsModelSrv', function ($scope, $location, MapModelSrv, FacesModelSrv, ConstraintsModelSrv) {
+    .controller('MetaCtrl', ['$scope', '$location', '$rootScope', 'ModelsSrv', function ($scope, $location, $rootScope, ModelsSrv) {
 
 
     /***********
      * Models  *
      ***********/
 
-    // Site State model
-    $scope.siteStateModel = {
+    $rootScope.models = {
         activeView: $location.path().replace('/', ''),
+
+        date:       undefined,
+
+        location:   undefined,
+        zoom:       undefined,
+
+        faces:      undefined,
     };
-    // Map model
-    $scope.mapModel = {
-        zoom: undefined,
-        center: undefined,
-        bounds: undefined,
-    }
-    // Constraints model
-    $scope.constraintsModel = {
-        location: undefined,
-        distance: undefined,
-        date: undefined,
-    }
-    $scope.facesModel = {
-        faces: [],
-    }
+    $rootScope.constants = {
+        peekMap: {
+            WIDTH: 242,
+            HEIGHT: 242,
+        }
+    };
+
 
 
     /*************************
      * Model initializations *
      *************************/
 
-    // Map model initialization
-    MapModelSrv.initialize().then(function(response) {
-        $scope.mapModel = response;
-        $scope.$apply();
+    ModelsSrv.initialize($rootScope.models, $rootScope.constants).then(function(response) {
+        $rootScope.models = response;
+        $rootScope.$apply();
 
-        // Wait to initialize constraints model until map model bounds are set
-        var checkForBounds = window.setInterval(function() {
-            if (typeof $scope.mapModel.bounds != 'undefined') {
-                clearInterval(checkForBounds);
+        $rootScope.$watch('models.location', function() {
 
-                // Constraints model initialization
-                ConstraintsModelSrv.update($scope.mapModel, new Date()).then(function(response) {
-                    $scope.constraintsModel = response;
+            ModelsSrv.getFaces($rootScope.models.location,
+                               $rootScope.models.zoom,
+                               $rootScope.models.date,
+                               $rootScope.constants).then(function(response) {
 
-                    // Faces model initialization
-                    FacesModelSrv.update($scope.constraintsModel).then(function(response) {
-                        $scope.facesModel.faces = response;
-                        $scope.$apply();
+                $rootScope.models.faces = response;
 
-                    // Errors from each initialization
-                    }, function(error) { console.log(error); });
-                }, function(error) { console.log(error); });  
-            }
-        }, 100); 
-    }, function(error) { console.log(error); });
+            }, function(error) { console.log(error) });
+        });
+
+        $rootScope.$watch('models.zoom', function() {
+
+            ModelsSrv.getFaces($rootScope.models.location,
+                               $rootScope.models.zoom,
+                               $rootScope.models.date,
+                               $rootScope.constants).then(function(response) {
+
+                $rootScope.models.faces = response;
+
+            }, function(error) { console.log(error) });
+        });
+
+        $rootScope.$watch('models.date', function() {
+
+            ModelsSrv.getFaces($rootScope.models.location,
+                               $rootScope.models.zoom,
+                               $rootScope.models.date,
+                               $rootScope.constants).then(function(response) {
+
+                $rootScope.models.faces = response;
+
+            }, function(error) { console.log(error) });
+        });
+
+
+    }, function(error) { console.log(error) });
 
 
 
