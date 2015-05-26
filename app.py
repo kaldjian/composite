@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, send_file
 from instagram.client import InstagramAPI
-from flask.ext.sqlalchemy import SQLAlchemy
+# from flask.ext.sqlalchemy import SQLAlchemy
 import os
 import json
 from boto.s3.connection import S3Connection
@@ -9,7 +9,7 @@ from boto.s3.key import Key
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
-db = SQLAlchemy(app)
+# db = SQLAlchemy(app)
 
 
 ###############
@@ -39,7 +39,8 @@ def instagram():
 	# 	results.append(media.images['standard_resolution'].url)
 
 	# face detection route w/out face detection
-
+	conn = S3Connection(app.config['AWS_ACCESS_KEY_ID'], app.config['AWS_SECRET_ACCESS_KEY'])
+	k = Key(conn.get_bucket('nucomposite'))
 
 	results = json.dumps(results)
 
