@@ -32,7 +32,6 @@ header {
 
 					li {
 						float: left;
-						margin-right: 7px;
 						overflow: auto;
 
 						i {
@@ -56,8 +55,19 @@ header {
 							background-color: lighten(#373737, 6%);
 						}
 					}
-					li:last-child {
+					li:nth-child(1) {
+						margin-right: 20px;
+
+						input {
+							width: 260px;
+						}
+					}
+					li:nth-child(2) {
 						margin-right: 0;
+
+						input {
+							width: 70px;
+						}
 					}
 
 				}

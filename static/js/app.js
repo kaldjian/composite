@@ -19,16 +19,16 @@ app.config(['$interpolateProvider', '$routeProvider',
 
 
         // Router
-        $routeProvider.
-            when('/map', {
+        $routeProvider
+            .when('/map', {
                 templateUrl: '../static/partials/map.html',
                 controller: 'MapCtrl'
-            }).
-            when('/faces', {
+            })
+            .when('/faces', {
                 templateUrl: '../static/partials/faces.html',
                 controller: 'FacesCtrl'
-            }).
-            otherwise({
+            })
+            .otherwise({
                 redirectTo: '/faces'
             });
     }]);

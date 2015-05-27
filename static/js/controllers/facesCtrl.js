@@ -15,7 +15,7 @@ angular
      *******************/
 
     // Switch active view
-    $scope.siteStateModel.activeView = 'faces';
+    $scope.models.activeView = 'faces';
 
 
     /******************

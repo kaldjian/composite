@@ -7,7 +7,7 @@
 
 angular
     .module('compositeApp.controllers')
-    .controller('PeekCtrl', ['$scope', 'MapModelSrv', function ($scope, MapModelSrv) {
+    .controller('PeekCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
 
 
     /*******************
@@ -18,7 +18,7 @@ angular
 
         // create map options
         var mapOptions = {
-            center: $scope.mapModel.center,
+            center: $rootScope.models.location,
             disableDefaultUI: true,
             disableDoubleClickZoom: true,
             draggable: false,
@@ -127,36 +127,30 @@ angular
                         ]
                     }
                 ],
-            zoom: $scope.mapModel.zoom - 1,
+            zoom: $rootScope.models.zoom - 1,
         };
 
         // map model not completely initialized immediately, need to wait until it is
         var checkforMapModel = window.setInterval(function() {
-            if (typeof $scope.mapModel.center != 'undefined') {
+            if (typeof $rootScope.models.location != 'undefined') {
 
                 // update map options
-                mapOptions.center = $scope.mapModel.center;
-                mapOptions.zoom = $scope.mapModel.zoom - 1;
+                mapOptions.center = $rootScope.models.location;
+                mapOptions.zoom = $rootScope.models.zoom;
 
                 // create map instance
                 var peekMap = new google.maps.Map(document.getElementById('peek-map'), mapOptions);
 
-                // when it's loaded, initialize the mapModel's bounds
-                google.maps.event.addListener(peekMap, 'tilesloaded', function() {
-                    $scope.mapModel = MapModelSrv.setBounds($scope.mapModel, peekMap.getBounds());
-                    $scope.$apply();
+                // update the map whenever the map model's updated
+                $rootScope.$watch('models.location', function() {
+                    peekMap.setCenter($rootScope.models.location);
+                    peekMap.setZoom($rootScope.models.zoom - 1);
                 });
 
-                // update the map whenever the map model's updated
-                $scope.$watch('mapModel', function() {
-                    peekMap.setCenter($scope.mapModel.center);
-                    peekMap.setZoom($scope.mapModel.zoom - 1);
-                }, true);
-
                 // when showing map peek on faces view, trigger resize event
-                $scope.$watch('siteStateModel.activeView', function() {
+                $rootScope.$watch('models.activeView', function() {
 
-                    if ($scope.siteStateModel.activeView == 'faces') {
+                    if ($rootScope.models.activeView == 'faces') {
                         setTimeout(function() {
                             google.maps.event.trigger(peekMap, 'resize');
                         }, 100);
@@ -180,7 +174,7 @@ angular
 
     // Toggle active view on peek box click
     $scope.toggleActiveView = function() {
-        switch ($scope.siteStateModel.activeView) {
+        switch ($rootScope.models.activeView) {
             case 'faces':
                 window.location.href = "/#/map";
                 break;

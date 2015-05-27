@@ -1,0 +1,32 @@
+.pac-container {
+	background-color: #494949;
+	border: 1px solid darken(#494949, 7%);
+	box-shadow: none;
+
+	.pac-item {
+		color: #888;
+		background-color: #494949;
+		border: 1px solid darken(#494949, 4%);
+		border-style: none none solid none;
+		cursor: pointer;
+
+		.pac-icon {
+			display: none;
+		}
+		.pac-item-query {
+			font-size: 11px;
+			color: #aaa;
+
+			.pac-matched {
+				color: #bababa;
+			}
+		}
+	}
+	.pac-item:last-child {
+		margin-bottom: 5px;
+		border-bottom: none;
+	}
+	.pac-item:hover {
+		background-color: lighten(#494949, 3%);
+	}
+}

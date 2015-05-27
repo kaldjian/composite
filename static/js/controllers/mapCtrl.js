@@ -7,7 +7,7 @@
 
 angular
     .module('compositeApp.controllers')
-    .controller('MapCtrl', ['$scope', 'FacesModelSrv', 'MapModelSrv', 'ConstraintsModelSrv', function ($scope, FacesModelSrv, MapModelSrv, ConstraintsModelSrv) {
+    .controller('MapCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
 
 
         /*******************
@@ -15,15 +15,16 @@ angular
          *******************/
 
         // Switch active view
-        $scope.siteStateModel.activeView = 'map';
+        $rootScope.models.activeView = 'map';
 
         // Initialize map
         $scope.initializeMap = function() {
 
             // Set map options
             var mapOptions = {
-                center: $scope.mapModel.center,
+                center: $rootScope.models.location,
                 disableDefaultUI: true,
+                disableDoubleClickZoom: true,
                 styles: [
                     {
                         "stylers": [ 
@@ -128,51 +129,43 @@ angular
                         ]
                     }
                 ],
-                zoom: $scope.mapModel.zoom,
+                zoom: $rootScope.models.zoom,
             };
 
-            // map model not completely initialized immediately, need to wait until it is
+            // Wait until models are initialized
             var checkforMapModel = window.setInterval(function() {
-                if (typeof $scope.mapModel.center != 'undefined') {
+                if (typeof $rootScope.models.location != 'undefined') {
+
+                    // stop checking for map model
+                    clearInterval(checkforMapModel);
 
                     // update map options
-                    mapOptions.center = $scope.mapModel.center;
-                    mapOptions.zoom = $scope.mapModel.zoom - 1;
+                    mapOptions.center = $rootScope.models.location;
+                    mapOptions.zoom = $rootScope.models.zoom;
 
                     // create map instance
                     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-                    // Initialize map model bounds without having to drag
-                    google.maps.event.addListener(map, 'tilesloaded', function() {
-                        $scope.mapModel = MapModelSrv.setBounds($scope.mapModel, map.getBounds());
-                        $scope.$apply();
-                    });
-
                     // Establish dragend listener
                     google.maps.event.addListener(map, 'dragend', function() {
 
-                        // Update map model
-                        $scope.mapModel = MapModelSrv.setZoom($scope.mapModel, map.getZoom());
-                        $scope.mapModel = MapModelSrv.setCenter($scope.mapModel, map.getCenter());
-                        $scope.mapModel = MapModelSrv.setBounds($scope.mapModel, map.getBounds());
-                        $scope.$apply();
-
-                        // Update constraints model
-                        ConstraintsModelSrv.update($scope.mapModel, $scope.constraintsModel.date).then(function(response) {
-                            $scope.constraintsModel = response;
-
-                            // Update faces model
-                            FacesModelSrv.update($scope.constraintsModel).then(function(response) {
-                                $scope.facesModel.faces = response;
-                                $scope.$apply();
-
-                            // Display any errors
-                            }, function(error) { console.log(error); });
-                        }, function(error) { console.log(error); });
+                        $rootScope.$apply(function() {
+                            $rootScope.models.location = map.getCenter();   
+                        });
                     });
 
-                    // stop checking for map model
-                    clearInterval(checkforMapModel);
+                    // Establish zoom_changed listener
+                    google.maps.event.addListener(map, 'zoom_changed', function() {
+
+                        $rootScope.$apply(function() {
+                            $rootScope.models.zoom = map.getZoom();
+                        });
+                    });
+
+                    // update the map whenever the map model's updated
+                    $rootScope.$watch('models.location', function() {
+                        map.setCenter($rootScope.models.location);
+                    });
                 }
             }, 100);
         };
