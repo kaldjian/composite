@@ -47,9 +47,10 @@ def faceBox(faces, gray, color, pid):
         width = x2 - x1
         height = y2 - y1
         crop_img = color[y1:y1 + height, x1:x1 + width]
+        img_key = pid + "_" + str(count)
         img_path = "static/img/cropped_faces/" + pid + "_face_" + str(count) + ".jpg"
         cv2.imwrite(img_path, crop_img)
-        img_list.append(img_path)
+        img_list.append([img_path, img_key])
         count = count + 1
 
     #print ("Number of faces: ", count)
