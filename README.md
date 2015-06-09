@@ -25,10 +25,10 @@ AWS, which we then shoot back to the client to display.
 ## File Structure
 .
 ├── README.md
-├── app.py // Flask routing, instagram endpoint, app configuration
+├── app.py                      # Flask routing, instagram endpoint, app configuration
 ├── config.py
-├── face_detection.py // Handles face detection with OpenCV
-├── haarscascades // Contains face models for cropping functionality
+├── face_detection.py           # Handles face detection with OpenCV
+├── haarscascades               # Contains face models for cropping functionality
 |   ├── eye
 |   |   ├── haarcascade_eye.xml
 |   |   ├── haarcascade_eye_tree_eyeglasses.xml
@@ -39,44 +39,44 @@ AWS, which we then shoot back to the client to display.
 |   |   ├── ...
 ├── manage.py
 ├── models.py
-├── requirements.txt // Defines application's Flask dependencies
+├── requirements.txt              # Defines application's Flask dependencies
 ├── static
-|   ├── bower_components // Javascript dependencies and libraries
+|   ├── bower_components          # Javascript dependencies and libraries
 |   |   ├── ...
-|   ├── css // Contains all styling with a SASS layout
-|   |   ├── main.css // Output from sass watch on main.scss
+|   ├── css                       # Contains all styling with a SASS layout
+|   |   ├── main.css              # Output from sass watch on main.scss
 |   |   ├── main.css.map
-|   |   ├── main.scss // All SASS scripts compile into this file
+|   |   ├── main.scss             # All SASS scripts compile into this file
 |   |   ├── modules
-|   |   |   ├── _all.scss // All modules compile into this file
+|   |   |   ├── _all.scss         # All modules compile into this file
 |   |   |   ├── ...
 |   |   ├── normalize.css
 |   |   ├── partials
-|   |   |   ├── _base.scss // All partials compile into this file
+|   |   |   ├── _base.scss        # All partials compile into this file
 |   |   |   ├── ...
-|   ├── fonts // Application fonts
+|   ├── fonts                     # Application fonts
 |   |   ├── ...
-|   ├── img // Temporary store for cropped images
+|   ├── img                       # Temporary store for cropped images
 |   |   ├── cropped_faces
 |   |   |   ├── ...
-|   ├── js // Angular modules
-|   |   ├── app.js // Declares angular application
-|   |   ├── controllers // Controller module
-|   |   |   ├── facesCtrl.js // Controls main faces view
-|   |   |   ├── headerCtrl.js // Controls header
-|   |   |   ├── index.js // Defines module
-|   |   |   ├── mapCtrl.js // Controls main map view
-|   |   |   ├── metaCtrl.js // Maintains models throughout application
-|   |   |   ├── peekCtrl.js // Controls peek view in bottom left of interface
-|   |   ├── services // Services module
-|   |   |   ├── blockingSrv.js // Implements a block so Instagram endpoint doesn't get overwhelmed
-|   |   |   ├── facesModelSrv.js // Updates faces model with given constraints
-|   |   |   ├── index.js // Defines module
-|   |   |   ├── modelSrv.js // Manipulates application's models
-|   ├── partials // Contains all view partials
+|   ├── js                        # Angular modules
+|   |   ├── app.js                # Declares angular application
+|   |   ├── controllers           # Controller module
+|   |   |   ├── facesCtrl.js      # Controls main faces view
+|   |   |   ├── headerCtrl.js     # Controls header
+|   |   |   ├── index.js          # Defines module
+|   |   |   ├── mapCtrl.js        # Controls main map view
+|   |   |   ├── metaCtrl.js       # Maintains models throughout application
+|   |   |   ├── peekCtrl.js       # Controls peek view in bottom left of interface
+|   |   ├── services              # Services module
+|   |   |   ├── blockingSrv.js    # Implements a block so Instagram endpoint doesn't get overwhelmed
+|   |   |   ├── facesModelSrv.js  # Updates faces model with given constraints
+|   |   |   ├── index.js          # Defines module
+|   |   |   ├── modelSrv.js       # Manipulates application's models
+|   ├── partials                  # Contains all view partials
 |   |   ├── ...
-├── templates // Flask templates
-|   ├── index.html // Just one because Angular
+├── templates                     # Flask templates
+|   ├── index.html                # Just one because Angular
 
 
 
