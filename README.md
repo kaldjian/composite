@@ -1,6 +1,6 @@
 # Composite
-Northwestern University, EECS 395 (Innovation in Journalism & Technology)
-Alex Kaldjian, Matt Ehringer, Jon Rovira
+####Northwestern University, EECS 395 (Innovation in Journalism &amp; Technology)
+####Alex Kaldjian, Matt Ehringer, Jon Rovira
 
 
 ## Overview
