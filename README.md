@@ -23,6 +23,7 @@ AWS, which we then shoot back to the client to display.
 
 
 ## File Structure
+.
 ├── README.md
 ├── app.py // Flask routing, instagram endpoint, app configuration
 ├── config.py
