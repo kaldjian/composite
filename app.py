@@ -40,7 +40,9 @@ def instagram():
 
 	# s3 connection
 	conn = S3Connection(app.config['AWS_ACCESS_KEY_ID'], app.config['AWS_SECRET_ACCESS_KEY'])
+	k = Key(conn.get_bucket('nucomposite'))
 
+	# accesses location data from google maps
 	data = json.loads(request.data.decode())
 	lat = data["lat"]
 	lng = data["lng"]
@@ -57,19 +59,16 @@ def instagram():
 	# 		for img_path in img_paths:
 	# 			results.append(img_path)
 
+	# instagram query
 	photos = api.media_search(count=50, lat=lat, lng=lng, distance=1500)
 
+	# parse class, will remove with setup of Mongo/PostgreSQL
 	class Face(ParseObject):
 		pass
 
-	k = Key(conn.get_bucket('nucomposite'))
-
+	# Face detection
 	for i in range(len(photos)):
-		# urllib.urlretrieve(photos[i].images['standard_resolution'].url, "temp.jpg")
-		img = photos[i]
-		url = img.images['standard_resolution'].url
-		pid = img.id
-		img_paths = detect_faces(url, pid)
+		img_paths = detect_faces(photos[i].images['standard_resolution'].url, photos[i].id)
 		
 		if not img_paths == []:
 			for img_path in img_paths:
@@ -82,6 +81,7 @@ def instagram():
 
 				aws_url = 'http://nucomposite.s3.amazonaws.com/' + face_key
 
+				# saving Parse object
 				to_save = Face(
 				url=aws_url,
 				timestamp = photos[i].created_time,
@@ -89,6 +89,8 @@ def instagram():
 				id = str(face_key)
 				)
 				to_save.save()
+
+				
 
 
 

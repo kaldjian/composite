@@ -6,3 +6,7 @@
 
 # stylesheet cache
 static/style/.sass-cache
+
+# opencv files
+cv.py
+cv2.so
