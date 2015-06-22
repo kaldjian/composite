@@ -1,31 +1,29 @@
-/***********************
- * Map View Controller *
- ***********************/
+/************************
+ * Peek View Controller *
+ ************************/
 
 'use strict';
 
 
 angular
-    .module('compositeApp.controllers')
-    .controller('MapCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+    .module('compositeApp.peek')
+    .controller('PeekCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
 
 
-        /*******************
-         * Data Management *
-         *******************/
+    /*******************
+     * Data Management *
+     *******************/
 
-        // Switch active view
-        $rootScope.models.activeView = 'map';
+    $scope.initialize = function() {
 
-        // Initialize map
-        $scope.initializeMap = function() {
-
-            // Set map options
-            var mapOptions = {
-                center: $rootScope.models.location,
-                disableDefaultUI: true,
-                disableDoubleClickZoom: true,
-                styles: [
+        // create map options
+        var mapOptions = {
+            center: $rootScope.models.location,
+            disableDefaultUI: true,
+            disableDoubleClickZoom: true,
+            draggable: false,
+            scrollwheel: false,
+            styles: [
                     {
                         "stylers": [ 
                             {
@@ -129,69 +127,77 @@ angular
                         ]
                     }
                 ],
-                zoom: $rootScope.models.zoom,
-            };
-
-            // Wait until models are initialized
-            var checkforMapModel = window.setInterval(function() {
-                if (typeof $rootScope.models.location != 'undefined') {
-
-                    // stop checking for map model
-                    clearInterval(checkforMapModel);
-
-                    // update map options
-                    mapOptions.center = $rootScope.models.location;
-                    mapOptions.zoom = $rootScope.models.zoom;
-
-                    // create map instance
-                    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
-                    // Establish dragend listener
-                    google.maps.event.addListener(map, 'dragend', function() {
-
-                        $rootScope.$apply(function() {
-                            $rootScope.models.location = map.getCenter();   
-                        });
-                    });
-
-                    // Establish zoom_changed listener
-                    google.maps.event.addListener(map, 'zoom_changed', function() {
-
-                        $rootScope.$apply(function() {
-                            $rootScope.models.zoom = map.getZoom();
-                        });
-                    });
-
-                    // update the map whenever the map model's updated
-                    $rootScope.$watch('models.location', function() {
-                        map.setCenter($rootScope.models.location);
-                    });
-                }
-            }, 100);
+            zoom: $rootScope.models.zoom - 1,
         };
 
+        // map model not completely initialized immediately, need to wait until it is
+        var checkforMapModel = window.setInterval(function() {
+            if (typeof $rootScope.models.location != 'undefined') {
+
+                // update map options
+                mapOptions.center = $rootScope.models.location;
+                mapOptions.zoom = $rootScope.models.zoom;
+
+                // create map instance
+                var peekMap = new google.maps.Map(document.getElementById('peek-map'), mapOptions);
+
+                // update the map whenever the map model's updated
+                $rootScope.$watch('models.location', function() {
+                    peekMap.setCenter($rootScope.models.location);
+                    peekMap.setZoom($rootScope.models.zoom - 1);
+                });
+
+                // when showing map peek on faces view, trigger resize event
+                $rootScope.$watch('models.activeView', function() {
+
+                    if ($rootScope.models.activeView == 'faces') {
+                        setTimeout(function() {
+                            google.maps.event.trigger(peekMap, 'resize');
+                        }, 100);
+                    }
+                }, true);
+
+                // stop checking for map model
+                clearInterval(checkforMapModel);
+            }
+        }, 100);
+    };
 
 
-        /******************
-         * UI Interaction *
-         ******************/
-        $scope.navigateToFaces = function() {
-            window.location.href = "/#/faces";
-        };
-
-
-
-        /***********
-         * Styling *
-         ***********/
-
-
-
-        /***********
-         * Helpers *
-         ***********/
 
 
 
 
-    }]);
+    /******************
+     * UI Interaction *
+     ******************/
+
+    // Toggle active view on peek box click
+    $scope.toggleActiveView = function() {
+        switch ($rootScope.models.activeView) {
+            case 'faces':
+                window.location.href = "/#/map";
+                break;
+            case 'map':
+                window.location.href = "/#/faces";
+                break;
+        }
+    };
+
+
+
+
+    /***********
+     * Styling *
+     ***********/
+
+    // Crop images into squares
+    $scope.cropFaces = function() {
+        $('ul.faces-peek li').each(function() {
+            var width = $(this).children('img').width();
+            $(this).height(width);
+        });
+    };
+
+
+}]);

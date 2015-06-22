@@ -1,7 +1,7 @@
 /********************************
- * Declaring Controllers Module *
+ * Declaring Common Module *
  ********************************/
 
-angular.module('compositeApp.controllers', [
+angular.module('compositeApp.common', [
 	'compositeApp.services',
 ]);

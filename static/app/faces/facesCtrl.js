@@ -6,7 +6,7 @@
 
 
 angular
-    .module('compositeApp.controllers')
+    .module('compositeApp.faces')
     .controller('FacesCtrl', ['$scope', function ($scope) {
 
 

@@ -6,7 +6,10 @@
 
 var app = angular.module('compositeApp', [
     'ngRoute',
-    'compositeApp.controllers',
+    'compositeApp.header',
+    'compositeApp.peek',
+    'compositeApp.map',
+    'compositeApp.faces',
 ]);
 
 
@@ -21,11 +24,11 @@ app.config(['$interpolateProvider', '$routeProvider',
         // Router
         $routeProvider
             .when('/map', {
-                templateUrl: '../static/partials/map.html',
+                templateUrl: '../static/app/map/map.html',
                 controller: 'MapCtrl'
             })
             .when('/faces', {
-                templateUrl: '../static/partials/faces.html',
+                templateUrl: '../static/app/faces//faces.html',
                 controller: 'FacesCtrl'
             })
             .otherwise({

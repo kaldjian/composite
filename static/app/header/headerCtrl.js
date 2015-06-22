@@ -6,7 +6,7 @@
 
 
 angular
-    .module('compositeApp.controllers')
+    .module('compositeApp.header')
     .controller('HeaderCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
 
 
@@ -34,12 +34,12 @@ angular
         });
 
         // Wait for constratints model date to be initialized, initialize datepicker date
-        var checkForDate = window.setInterval(function() {
-            if (typeof $rootScope.models.date != 'undefined') {
-                $('#datepicker').datepicker("setDate", $rootScope.models.date);
-                clearInterval(checkForDate);
-            }
-        }, 100);
+        // var checkForDate = window.setInterval(function() {
+        //     if (typeof $rootScope.models.date != 'undefined') {
+        //         $('#datepicker').datepicker("setDate", $rootScope.models.date);
+        //         clearInterval(checkForDate);
+        //     }
+        // }, 100);
 
 
 
