@@ -17,13 +17,13 @@
 
 	<body>
 		<!-- Header -->
-		<ng-include src="'/static/app/header/header.html'" ng-controller="HeaderCtrl"></ng-include>
+		<ng-include src="'/static/app/header/header.html'"></ng-include>
 
 		<!-- Angular view frame -->
-		<div ng-view class="view-frame" id="content"></div>
+		<!-- <div ng-view class="view-frame" id="content"></div> -->
 
 		<!-- Peek partial -->
-		<ng-include src="'/static/app/peek/peek.html'" ng-controller="PeekCtrl"></ng-include>
+		<!-- <ng-include src="'/static/app/peek/peek.html'" ng-controller="PeekCtrl"></ng-include> -->
 
 
 
@@ -43,19 +43,24 @@
 		<!-- My Scripts -->
 		<script src="/static/app/app.js"></script>
 
+		<script src="/static/app/common/index.js"></script>
+		<script src="/static/app/common/locationModel.js"></script>
+		<script src="/static/app/common/dateModel.js"></script>
 		<script src="/static/app/common/facesModel.js"></script>
 
 		<script src="/static/app/header/index.js"></script>
 		<script src="/static/app/header/headerCtrl.js"></script>
+		<script src="/static/app/header/autocompleteDir.js"></script>
+		<script src="/static/app/header/datepickerDir.js"></script>
 
-		<script src="/static/app/map/index.js"></script>
-		<script src="/static/app/map/mapCtrl.js"></script>
+		<!--<script src="/static/app/map/index.js"></script>
+		<script src="/static/app/map/mapCtrl.js"></script> -->
 
-		<script src="/static/app/faces/index.js"></script>
-		<script src="/static/app/faces/facesCtrl.js"></script>
+		<!-- <script src="/static/app/faces/index.js"></script>
+		<script src="/static/app/faces/facesCtrl.js"></script> -->
 
-		<script src="/static/app/peek/index.js"></script>
-		<script src="/static/app/peek/peekCtrl.js"></script>
+		<!-- <script src="/static/app/peek/index.js"></script> -->
+		<!-- <script src="/static/app/peek/peekCtrl.js"></script> -->
 
 	</body>
 

@@ -162,7 +162,6 @@ angular
             };
 
             var toLatLng = function(point, zoom) {
-
                 var lng = (point.x - _pixelOrigin.x) / _pixelsPerLonDegree;
                 var latRadians = (point.y - _pixelOrigin.y) / _pixelsPerLonRadian;
                 var lat = radiansToDegrees(2 * Math.atan(Math.exp(latRadians)) - Math.PI / 2);

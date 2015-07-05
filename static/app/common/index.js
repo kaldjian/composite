@@ -3,5 +3,5 @@
  ********************************/
 
 angular.module('compositeApp.common', [
-	'compositeApp.services',
+	
 ]);

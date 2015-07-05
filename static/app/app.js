@@ -6,10 +6,11 @@
 
 var app = angular.module('compositeApp', [
     'ngRoute',
+    'compositeApp.common',
     'compositeApp.header',
-    'compositeApp.peek',
-    'compositeApp.map',
-    'compositeApp.faces',
+    // 'compositeApp.peek',
+    // 'compositeApp.map',
+    // 'compositeApp.faces',
 ]);
 
 

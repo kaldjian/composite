@@ -7,7 +7,9 @@
 
 angular
     .module('compositeApp.peek')
-    .controller('PeekCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+    .controller('PeekCtrl',
+    	       ['$scope', 'FacesModel', 'LocationModel'
+    	       function ($scope, FacesModel, LocationModel) {
 
 
     /*******************

@@ -1,19 +1,24 @@
-<header ng-init="initialize()">
+<header  ng-controller="HeaderCtrl">
 	<div class="header-inner">
+
 		<div class="header-branding">
 			<h1>COMPOSITE</h1>
 		</div>
+
 		<div class="header-inputs">
 			<form>
 				<ul>
+
 					<li>
 						<i class="fa fa-map-marker"></i>
-						<input id="locationPicker" type="text" placeholder="Location" />
+						<input autocomplete id="locationPicker" placeholder="" type="text" value="{[location.reverseGeocode]}" />
 					</li>
+
 					<li>
 						<i class="fa fa-calendar"></i>
-						<input id="datepicker" type="text">
+						<input datepicker id="datePicker" type="text">
 					</li>
+
 				</ul>
 			</form>
 		</div>
